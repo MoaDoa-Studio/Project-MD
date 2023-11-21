@@ -6,10 +6,9 @@ using UnityEngine.EventSystems;
 public class Building : MonoBehaviour
 {
     [SerializeField]
-    private int building_Num;
+    private int ID;
 
-    public bool isCollide = false; // 충돌 체크    
-    public bool isDisplayed = false; // 배치 상태 체크.
+    public bool isCollide = false; // 충돌 체크
 
     #region 충돌 체크
     private void OnCollisionEnter(Collision collision)
@@ -29,13 +28,26 @@ public class Building : MonoBehaviour
     }
     #endregion
 
-    private void OnMouseUp()
+    private void OnMouseDown()
     {
-        Debug.Log("dhsak");
-        if (isDisplayed == false)
+        Debug.Log("마우스 다운");
+        // 수정모드인지 확인.
+        if (GameManager.instance.builderManager.get_BuilderMode() != 2)
             return;
-        isDisplayed = false;
-        GameManager.instance.placementSystem.StartMove(building_Num, this.gameObject);
+
+        // 여기서 선택한 건물 세팅해주고.
+        GameManager.instance.builderManager.StartMove(ID, this.gameObject);
+    }
+
+    private void OnMouseDrag()
+    {
+        Debug.Log("드래그 중");
+        // 수정모드인지 확인.
+        if (GameManager.instance.builderManager.get_BuilderMode() != 2)
+            return;
+
+        // 여기서 그리드 맞게 드래그 구현하자.
+        GameManager.instance.builderManager.moveItem();
     }
 
 }
