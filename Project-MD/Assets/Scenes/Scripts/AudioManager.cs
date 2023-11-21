@@ -51,7 +51,11 @@ public class AudioManager : MonoBehaviour
     
     }
 
-
+    private void Start()
+    {
+        Play("Main_Bgm");
+        Debug.Log("now listening Bgm : " + sounds);
+    }
     // »ç¿îµå Play
     public void Play(string name)
     {
