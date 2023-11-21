@@ -53,7 +53,7 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        Play("Main_Bgm");
+        PlayBgm("Main_Bgm");
         Debug.Log("now listening Bgm : " + sounds);
     }
     // »ç¿îµå Play
