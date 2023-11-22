@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 public class BuilderManager : MonoBehaviour
 {
     [SerializeField]
@@ -25,32 +26,42 @@ public class BuilderManager : MonoBehaviour
     // Builder 하위 UI들.    
     private GameObject Center_UI;
     private GameObject Right_UI;
-    private Button Modify;
+    private Button Relocate;
     private Button Fix;
+    private Button Cancel;
+    private Button Quit;
 
     BuilderMode builderMode;
     enum BuilderMode
     {
         No, // 건축모드 아님.
         Default, // 기본 건축 모드.
-        Modify, // 배치 수정 모드.
+        Fix, // 새로운 건물 설치 모드.
+        Relocate, // 배치 수정 모드.
     }
-    
+
+
+    // 임시.
+    public TextMeshProUGUI cur_Mode;
+
     private void Start()
     {
         // 하위 UI 할당.
         Center_UI = Builder_UI.transform.Find("Center_UI").gameObject;
         Right_UI = Builder_UI.transform.Find("Right_UI").gameObject;
-        Modify = Right_UI.transform.Find("Modify").GetComponent<Button>();
+        Relocate = Right_UI.transform.Find("Relocate").GetComponent<Button>();
         Fix = Right_UI.transform.Find("Fix").GetComponent<Button>();
-        builderMode = BuilderMode.No;
-
+        Cancel = Right_UI.transform.Find("Cancel").GetComponent<Button>();
+        Quit = Right_UI.transform.Find("Quit").GetComponent<Button>();
+       
         // 초기화.
         StopMove();
+        builderMode = BuilderMode.No;
     }
             
     public void change_BuilderMode(string mode)
     {
+        cur_Mode.text = mode;
         // 현재 건축 모드를 변경하는 함수.
         switch(mode)
         {
@@ -61,12 +72,44 @@ public class BuilderManager : MonoBehaviour
             case "Default":
                 builderMode = BuilderMode.Default;
                 GridLine.SetActive(false);
+                interactable_Fix(false);
+                interactable_Cancel(false);
+                interactable_Relocate(true);
+                interactable_Quit(true);
                 break;
-            case "Modify":
-                builderMode = BuilderMode.Modify;
+            case "Fix":
+                builderMode = BuilderMode.Fix;
                 GridLine.SetActive(true);
+                interactable_Fix(true);
+                interactable_Cancel(true);
+                interactable_Relocate(false);
+                interactable_Quit(false);
+                break;
+            case "Relocate":
+                builderMode = BuilderMode.Relocate;
+                GridLine.SetActive(true);
+                interactable_Fix(false);
+                interactable_Cancel(true);
+                interactable_Relocate(true);
+                interactable_Quit(true);
                 break;
         }
+    }
+    private void interactable_Fix(bool toggle)
+    {
+        Fix.interactable = toggle;
+    }
+    private void interactable_Cancel(bool toggle)
+    {
+        Cancel.interactable = toggle;
+    }
+    private void interactable_Relocate(bool toggle)
+    {
+        Relocate.interactable = toggle;
+    }
+    private void interactable_Quit(bool toggle)
+    {
+        Quit.interactable = toggle;
     }
     public int get_BuilderMode()
     {
@@ -84,27 +127,17 @@ public class BuilderManager : MonoBehaviour
                 Center_UI.transform.GetChild(i).gameObject.SetActive(false);
         }
     }
-    private void interactable_Fix(bool toggle)
-    {
-        Fix.interactable = toggle;
-    }
-    private void interactable_Cancel(bool toggle)
-    {
-        Modify.interactable = toggle;
-    }
-    private void interactable_Modify(bool toggle)
-    {
-        Modify.interactable = toggle;
-    }    
-    private void interactable_Quit(bool toggle)
-    {
-        Fix.interactable = toggle;
-    }    
     public void click_FixButton()
     {
         // 충돌 중인 건물이 있다면?
         if (checkCollide() == true)
-            return;        
+            return;
+
+        // 재화 검사 및 UI 띄워야 하는 함수.
+
+        //
+
+        change_BuilderMode("Default");
         StopMove();
     }
     public void click_CancelButton()
@@ -112,6 +145,14 @@ public class BuilderManager : MonoBehaviour
         // 배치를 캔슬할 때 사용하는 함수.
         if (mouseIndicator != null)
             Destroy(mouseIndicator);
+
+        // 재화 돌려받는 함수.
+
+        //
+
+        // Fix -> Default. Modify에서는 변경 X.
+        if (builderMode == BuilderMode.Fix)
+            change_BuilderMode("Default");
         StopMove();
     }
     public void click_QuitButton()
@@ -121,11 +162,16 @@ public class BuilderManager : MonoBehaviour
             return;        
 
         // Modify -> Default.
-        change_BuilderMode("Default");
+        if (builderMode == BuilderMode.Relocate)
+            change_BuilderMode("Default");
         StopMove();
     }    
     public void StartPlacement(int ID)
     {
+        // 수정 모드일 때는 설치 불가.
+        if (builderMode == BuilderMode.Relocate)
+            return;
+
         // 건물을 처음 생성할 때 사용하는 함수.
         // 매개 변수 ID와 같은 값을 가지는 Data.ID가 있다면 불러오기.
         selectedObjectIndex = database.buildingsData.FindIndex(data => data.ID == ID);
@@ -151,8 +197,8 @@ public class BuilderManager : MonoBehaviour
         Vector3 child_Pos = mouseIndicator.transform.GetChild(0).transform.localPosition;
         set_CellIndicator(prefab_size, child_Pos);
 
-        // 수정모드로 변경.
-        GameManager.instance.builderManager.change_BuilderMode("Modify");
+        // 설치 모드로 변경.
+        GameManager.instance.builderManager.change_BuilderMode("Fix");
 
         // 콜라이더 체크.
         change_CellColor();
@@ -173,8 +219,7 @@ public class BuilderManager : MonoBehaviour
         // 인디케이터 할당.        
         mouseIndicator = building;
 
-        // 셀 인디케이터 액티브 및 사이즈 할당.
-        cellIndicator.SetActive(true);        
+        // 셀 인디케이터 사이즈 할당.                
         Vector3Int building_size = database.buildingsData[selectedObjectIndex].size;
         Vector3 child_Pos = building.transform.GetChild(0).transform.localPosition;
         set_CellIndicator(building_size, child_Pos);
@@ -189,6 +234,9 @@ public class BuilderManager : MonoBehaviour
 
     public void moveItem()
     {
+        // 셀 인디케이터 액티브
+        cellIndicator.SetActive(true);
+
         // 마우스 -> 그리드 좌표 변환.
         Vector3Int gridPos = mouseToGrid();
 

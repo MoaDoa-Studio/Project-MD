@@ -32,7 +32,7 @@ public class Building : MonoBehaviour
     {
         Debug.Log("마우스 다운");
         // 수정모드인지 확인.
-        if (GameManager.instance.builderManager.get_BuilderMode() != 2)
+        if (GameManager.instance.builderManager.get_BuilderMode() < 2)
             return;
 
         // 여기서 선택한 건물 세팅해주고.
@@ -42,8 +42,8 @@ public class Building : MonoBehaviour
     private void OnMouseDrag()
     {
         Debug.Log("드래그 중");
-        // 수정모드인지 확인.
-        if (GameManager.instance.builderManager.get_BuilderMode() != 2)
+        // 수정 모드인지 확인.
+        if (GameManager.instance.builderManager.get_BuilderMode() < 2)
             return;
 
         // 여기서 그리드 맞게 드래그 구현하자.
