@@ -15,12 +15,9 @@ public class Npc_Moving : MonoBehaviour
 
     // 도착한 wayPoint 저장 변수
     private int wayPointIndex = 0;
-    // 이동할 목표 지점
-    private Transform target;
-
-
+    
     // 이동확정될 wavepoint 저장변수
-    private Transform[] target_wavepoint = new Transform[7];
+    private Vector3[] target_wavepoint = new Vector3[7];
 
     private void OnEnable()
     {
@@ -65,8 +62,17 @@ public class Npc_Moving : MonoBehaviour
         for (int i = 0; i < 7; i++)
         {
             GameObject newChild = Instantiate(childPrefab, this.gameObject.transform); // 부모 오브젝트의 자식 transform 생성
-            Vector3 randomPosition = new Vector3(Random.Range(-5f, 5f), Random.Range(0, 0), Random.Range(-5f, 5f));
-            newChild.transform.position = randomPosition;
+            
+            if (i == 0)
+                newChild.transform.position = this.transform.position;
+            else
+            {
+                Vector3 randomPosition = new Vector3(Random.Range(-5f, 5f), Random.Range(0, 0), Random.Range(-5f, 5f));
+                newChild.transform.position = randomPosition;
+            }
+
+            target_wavepoint[i] = newChild.transform.position;
+
             Debug.Log(i + "번째 위치는 : " + newChild.transform.position);
 
         }
