@@ -8,7 +8,8 @@ public class SpawnArea : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameObject newNPC = Instantiate(spawn_NPC, transform);       
+        GameObject newNPC = Instantiate(spawn_NPC, transform);
+        newNPC.transform.SetParent(null);
     }
 
 }

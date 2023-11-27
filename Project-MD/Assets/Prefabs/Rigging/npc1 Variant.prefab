@@ -84,6 +84,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6340383651402327760, guid: 01c27232006f9f74abf0184b51ac1d96, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5533902892296377297}
+    - targetCorrespondingSourceObject: {fileID: 6340383651402327760, guid: 01c27232006f9f74abf0184b51ac1d96, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6184680039629379697}
   m_SourcePrefab: {fileID: 100100000, guid: 01c27232006f9f74abf0184b51ac1d96, type: 3}
 --- !u!1 &3442901702436374527 stripped
 GameObject:
@@ -97,7 +100,7 @@ Animation:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3442901702436374527}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Animation: {fileID: 7400000, guid: d5355466eb37b824e9d17735d4b15f11, type: 2}
   m_Animations:
@@ -119,5 +122,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4f45106240190647a65151bc8f6cec1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  move_speed: 3
+  move_speed: 300
   childPrefab: {fileID: 3987917741019062031, guid: 8e4897db019bfde4fb4914c7a04fc3cc, type: 3}
+  wayPointIndex: 0
+  target_wavepoint:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+--- !u!54 &6184680039629379697
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3442901702436374527}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

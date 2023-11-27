@@ -1,44 +1,62 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization.Formatters;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class Npc_Moving : MonoBehaviour
 {
 
-    [HideInInspector]
-    public float move_speed = 3f;
+    
+    public float move_speed = 300f;
 
    
     // 생성할 자식 GameObject 프리팹
     public GameObject childPrefab;
 
     // 도착한 wayPoint 저장 변수
+    [SerializeField]
     private int wayPointIndex = 0;
-    
+
+    // 이동할 목표 지점
+    private Transform target;
+
     // 이동확정될 wavepoint 저장변수
+    [SerializeField]
     private Vector3[] target_wavepoint = new Vector3[7];
 
-    private void OnEnable()
+    private void Awake()
     {
-        // npc의 위치를 초기화시켜야함
-         Vector3 this_character_pos = this.transform.position;
-
         npc_Build();
 
-        
     }
-
     private void Start()
     {
-
-        // 초기시에 0으로 설정
-        wayPointIndex = 0;
-
-        //wayPoint =  
-    
+        target_wavepoint[0] = transform.position;
+        Debug.Log("내 위치 초기화");
+        wayPointIndex++;
     }
 
+    private void Update()
+    {
+     
+            //[1] 방향 구하기 - Vector3 : 목표위치 - 현재위치
+           Vector3 dir = target_wavepoint[wayPointIndex] - transform.position;
+
+            Debug.Log(dir + " 방향으로 이동중입니다");
+            
+            transform.Translate(dir.normalized * move_speed * Time.deltaTime, Space.World);
+            
+        //[2] 목표지점 도착 판정 : 타겟과 자신과의 거리를 구해 도착판정
+           float distance = Vector3.Distance(transform.position, target_wavepoint[wayPointIndex]);
+
+            Debug.Log("목표까지 남은 거리는 : " + distance);
+            if(distance < 0.2f)
+            {
+                GetNextPoint();
+            }
+
+        }
     
 
     // 도착시 다음 포인터의 정보를 가져와서 타겟 설정
@@ -50,12 +68,9 @@ public class Npc_Moving : MonoBehaviour
             // 새로운 길을 만들어내는 함수
 
         }
-
+        Debug.Log("부모 오브젝트와 가까이 붙어있습니다");
         wayPointIndex++;
-        
-        //target = WayPoint.points[wayPointIndex];
-
-    }
+       }
 
     public void npc_Build()
     {
@@ -63,17 +78,14 @@ public class Npc_Moving : MonoBehaviour
         {
             GameObject newChild = Instantiate(childPrefab, this.gameObject.transform); // 부모 오브젝트의 자식 transform 생성
             
-            if (i == 0)
-                newChild.transform.position = this.transform.position;
-            else
-            {
-                Vector3 randomPosition = new Vector3(Random.Range(-5f, 5f), Random.Range(0, 0), Random.Range(-5f, 5f));
-                newChild.transform.position = randomPosition;
-            }
+            Vector3 randomPosition = new Vector3(Random.Range(-5f, 5f), Random.Range(0, 0), Random.Range(-5f, 5f));
+            newChild.transform.position = randomPosition;
+            
 
             target_wavepoint[i] = newChild.transform.position;
-
+            
             Debug.Log(i + "번째 위치는 : " + newChild.transform.position);
+            Debug.Log(i + "번째 target_wavepoint는  : " + target_wavepoint[i]);
 
         }
     }
