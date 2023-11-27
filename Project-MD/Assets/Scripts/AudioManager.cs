@@ -135,7 +135,8 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        sound.volume = 0.7f;
+        // sound 볼륨 1f로 초기화
+        sound.volume = 1f;
         bgmName = sound.sound_Name;
 
         sound.audioSource.Play();

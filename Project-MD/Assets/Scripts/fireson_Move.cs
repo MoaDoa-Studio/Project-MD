@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// 캐릭터 npc 입력값에 따른 움직임& 애니메이션& 사운드 구현
 public class fireson_Move : MonoBehaviour
 {
     private Animation animation;
