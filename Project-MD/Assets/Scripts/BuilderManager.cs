@@ -19,7 +19,11 @@ public class BuilderManager : MonoBehaviour
     private GameObject Builder_UI;
     [SerializeField]
     private GameObject GridLine; // 그리드 표시
-    
+    [SerializeField]
+    private GameObject BuildingInfo_UI; // 건물 상태창 UI.
+    [SerializeField]
+    private TextMeshProUGUI[] BuildingInfo; // 건물 상태창 인포.
+
     private int selectedObjectIndex = -1; // 선택된 건물 인덱스.
     private GameObject mouseIndicator; // 현재 선택된 건물 저장.
 
@@ -190,13 +194,12 @@ public class BuilderManager : MonoBehaviour
             Destroy(mouseIndicator);
         mouseIndicator = Instantiate(database.buildingsData[selectedObjectIndex].prefab, grid.CellToWorld(gridPos), Quaternion.identity, instance_Parent.transform);        
 
-        // 셀 인디케이터 액티브 및 사이즈 할당.
-        cellIndicator.SetActive(true);
+        // 셀 인디케이터 액티브 및 사이즈 할당.        
         cellIndicator.transform.localPosition = grid.CellToWorld(gridPos);
         Vector3Int prefab_size = database.buildingsData[selectedObjectIndex].size;
         Vector3 child_Pos = mouseIndicator.transform.GetChild(0).transform.localPosition;
         set_CellIndicator(prefab_size, child_Pos);
-
+        cellIndicator.SetActive(true);
         // 설치 모드로 변경.
         GameManager.instance.builderManager.change_BuilderMode("Fix");
 
@@ -233,10 +236,7 @@ public class BuilderManager : MonoBehaviour
     }
 
     public void moveItem()
-    {
-        // 셀 인디케이터 액티브
-        cellIndicator.SetActive(true);
-
+    {        
         // 마우스 -> 그리드 좌표 변환.
         Vector3Int gridPos = mouseToGrid();
 
@@ -246,6 +246,9 @@ public class BuilderManager : MonoBehaviour
 
         // 다른 건물과의 충돌 체크.
         change_CellColor();
+
+        // 셀 인디케이터 액티브
+        cellIndicator.SetActive(true);
     }
 
     public bool checkCollide()
@@ -286,5 +289,27 @@ public class BuilderManager : MonoBehaviour
         Transform cellIndicator_child = cellIndicator.transform.GetChild(0).transform;
         cellIndicator_child.localScale = new Vector3(size.x, 0.001f, size.z);
         cellIndicator_child.localPosition = new Vector3(child_Pos.x, 0f, child_Pos.z);
+    }
+
+    public void set_BuildingInfo(int ID, bool state, int pollution)
+    {
+        selectedObjectIndex = database.buildingsData.FindIndex(data => data.ID == ID);
+        // 데이타가 없다면 중지.
+        if (selectedObjectIndex < 0)
+        {
+            Debug.LogError($"No ID found {ID}");
+            return;
+        }
+
+        BuildingInfo_UI.SetActive(true);
+        BuildingInfo[0].text = "Name : " + database.buildingsData[selectedObjectIndex].name;
+        BuildingInfo[1].text = "State : " + state;
+        BuildingInfo[2].text = "Product : " + database.buildingsData[selectedObjectIndex].product;
+        BuildingInfo[3].text = "Productivity : " + database.buildingsData[selectedObjectIndex].productivity;        
+        BuildingInfo[4].text = "Pollution : " + pollution;
+
+        // 슬라이더 값으로 조절할거니깐 나중에.
+        //BuildingInfo[5].text = "Hungry : ";
+        //BuildingInfo[6].text = "EXP : ";
     }
 }
