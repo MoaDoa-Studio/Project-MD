@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters;
@@ -40,6 +41,15 @@ public class Npc_Moving : MonoBehaviour
     private void Update()
     {
      
+        //[2] 목표지점 도착 판정 : 타겟과 자신과의 거리를 구해 도착판정
+           float distance = Vector3.Distance(transform.position, target_wavepoint[wayPointIndex]);
+
+            Debug.Log("목표까지 남은 거리는 : " + distance);
+            if(distance < 0.2f)
+            {
+                StartCoroutine(waitsforMove());
+            }
+
             //[1] 방향 구하기 - Vector3 : 목표위치 - 현재위치
            Vector3 dir = target_wavepoint[wayPointIndex] - transform.position;
 
@@ -47,15 +57,20 @@ public class Npc_Moving : MonoBehaviour
             
             transform.Translate(dir.normalized * move_speed * Time.deltaTime, Space.World);
             
-        //[2] 목표지점 도착 판정 : 타겟과 자신과의 거리를 구해 도착판정
-           float distance = Vector3.Distance(transform.position, target_wavepoint[wayPointIndex]);
 
-            Debug.Log("목표까지 남은 거리는 : " + distance);
-            if(distance < 0.2f)
+            // waypoint 를 끝까지 다 도착했으면 새로운 waypoint 지정해주기
+            if(wayPointIndex == 6)
             {
-                GetNextPoint();
-            }
 
+                wayPointIndex = 0;
+            
+                for(int i = 0; i < target_wavepoint.Length; i++)
+                {
+                    Vector3 randomise = new Vector3(Random.Range(-3.5f, 3.5f), Random.Range(0, 0), Random.Range(-3.5f, 3.5f));
+
+                    target_wavepoint[i] = randomise;
+                }
+            }
         }
     
 
@@ -78,7 +93,7 @@ public class Npc_Moving : MonoBehaviour
         {
             GameObject newChild = Instantiate(childPrefab, this.gameObject.transform); // 부모 오브젝트의 자식 transform 생성
             
-            Vector3 randomPosition = new Vector3(Random.Range(-4f, 4f), Random.Range(0, 0), Random.Range(-4f, 4f));
+            Vector3 randomPosition = new Vector3(Random.Range(-3.5f, 3.5f), Random.Range(0, 0), Random.Range(-3.5f, 3.5f));
             newChild.transform.position = randomPosition;
             
 
@@ -87,7 +102,15 @@ public class Npc_Moving : MonoBehaviour
             Debug.Log(i + "번째 위치는 : " + newChild.transform.position);
             Debug.Log(i + "번째 target_wavepoint는  : " + target_wavepoint[i]);
 
+       
         }
+
     }
 
+    IEnumerator waitsforMove()
+    {
+        GetNextPoint();
+        yield return new WaitForSeconds(7f);
+        
+    }
 }
