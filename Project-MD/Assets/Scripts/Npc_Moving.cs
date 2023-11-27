@@ -10,19 +10,19 @@ public class Npc_Moving : MonoBehaviour
     
     public float move_speed = 300f;
 
-   
+
     // 생성할 자식 GameObject 프리팹
+    
     public GameObject childPrefab;
 
     // 도착한 wayPoint 저장 변수
-    [SerializeField]
     private int wayPointIndex = 0;
 
     // 이동할 목표 지점
     private Transform target;
 
     // 이동확정될 wavepoint 저장변수
-    [SerializeField]
+    
     private Vector3[] target_wavepoint = new Vector3[7];
 
     private void Awake()
@@ -78,7 +78,7 @@ public class Npc_Moving : MonoBehaviour
         {
             GameObject newChild = Instantiate(childPrefab, this.gameObject.transform); // 부모 오브젝트의 자식 transform 생성
             
-            Vector3 randomPosition = new Vector3(Random.Range(-5f, 5f), Random.Range(0, 0), Random.Range(-5f, 5f));
+            Vector3 randomPosition = new Vector3(Random.Range(-4f, 4f), Random.Range(0, 0), Random.Range(-4f, 4f));
             newChild.transform.position = randomPosition;
             
 
