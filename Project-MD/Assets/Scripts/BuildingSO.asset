@@ -42,6 +42,6 @@ MonoBehaviour:
     <type>k__BackingField: 0
     <product>k__BackingField: Ground
     <productivity>k__BackingField: 3
-    <max_productivity>k__BackingField: 1000
+    <max_productivity>k__BackingField: 20
     <size>k__BackingField: {x: 3, y: 1, z: 2}
     <prefab>k__BackingField: {fileID: 8679429526782892262, guid: 563f42f12ab3d9242b47fa92656ebfa3, type: 3}

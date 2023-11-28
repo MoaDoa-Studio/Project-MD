@@ -16,6 +16,8 @@ public class BuilderManager : MonoBehaviour
     [SerializeField]
     public BuildingDatabaseSO database; // 빌딩 DB        
     [SerializeField]
+    public ResourceManager resourceManager; // 빌딩 DB        
+    [SerializeField]
     private GameObject Builder_UI;
     [SerializeField]
     private GameObject GridLine; // 그리드 표시
@@ -34,7 +36,8 @@ public class BuilderManager : MonoBehaviour
     private Button Fix;
     private Button Cancel;
     private Button Quit;
-
+    private GameObject Inquire;
+    
     BuilderMode builderMode;
     enum BuilderMode
     {
@@ -53,11 +56,12 @@ public class BuilderManager : MonoBehaviour
         // 하위 UI 할당.
         Center_UI = Builder_UI.transform.Find("Center_UI").gameObject;
         Right_UI = Builder_UI.transform.Find("Right_UI").gameObject;
+        Inquire = BuildingInfo_UI.transform.Find("Inquire").gameObject;
         Relocate = Right_UI.transform.Find("Relocate").GetComponent<Button>();
         Fix = Right_UI.transform.Find("Fix").GetComponent<Button>();
         Cancel = Right_UI.transform.Find("Cancel").GetComponent<Button>();
         Quit = Right_UI.transform.Find("Quit").GetComponent<Button>();
-       
+        resourceManager = this.GetComponent<ResourceManager>();
         // 초기화.
         StopMove();
         builderMode = BuilderMode.No;
@@ -310,6 +314,14 @@ public class BuilderManager : MonoBehaviour
 
         // 슬라이더 값으로 조절할거니깐 나중에.
         //BuildingInfo[5].text = "Hungry : ";
-        //BuildingInfo[6].text = "EXP : ";
+        BuildingInfo[5].text = "Max_Product : "; // 최대생산량
+    }
+
+    // building_info UI V-체크 누를시에
+    public void check_Addresource()
+    {
+        resourceManager.first_Source[selectedObjectIndex] += database.buildingsData[selectedObjectIndex].max_productivity;
+       
+        Inquire.SetActive(false);
     }
 }

@@ -105,4 +105,5 @@ public class ResourceManager : MonoBehaviour
         add_First_ResourceValue("Spark", num);
         add_First_ResourceValue("Ground", num);
     }
+
 }
