@@ -281,7 +281,7 @@ public class BuilderManager : MonoBehaviour
         Vector3 centerPos = GameManager.instance.inputManager.get_CenterPosition();
         centerPos.y = 0;
         Vector3Int gridPos = grid.WorldToCell(centerPos);
-        return gridPos;
+        return gridPos;   
     }
     private void set_CellIndicator(Vector3Int size, Vector3 child_Pos)
     {
@@ -302,7 +302,7 @@ public class BuilderManager : MonoBehaviour
         }
 
         BuildingInfo_UI.SetActive(true);
-        BuildingInfo[0].text = "Name : " + database.buildingsData[selectedObjectIndex].name;
+        BuildingInfo[0].text = "Name : " + database  .buildingsData[selectedObjectIndex].name;
         BuildingInfo[1].text = "State : " + state;
         BuildingInfo[2].text = "Product : " + database.buildingsData[selectedObjectIndex].product;
         BuildingInfo[3].text = "Productivity : " + database.buildingsData[selectedObjectIndex].productivity;        
