@@ -67,10 +67,28 @@ public class BuildingState : MonoBehaviour
         if(making_cooltime <= 0)
         {
             // 생산을 합시다!! //value 값에 생산할 product, productivity 넣고 
-            resourceManager.add_First_ResourceValue(product, productivity);
-            Debug.Log($"생산량은 {productivity}, 이며 생산하는 물건은 {product}입니다");
+            int resourceID = getResourceID(product);
+            resourceManager.first_Source[resourceID] += productivity;
+            //Debug.Log($"생산량은 {productivity}, 이며 생산하는 물건은 {product}입니다");
             making_cooltime = reset_cooltime; // 쿨타임 초기화
         }
         making_cooltime -= Time.deltaTime;
+    }
+
+    private int getResourceID(string str)
+    {
+        // 리소스에 임의로 배정된 ID 리턴 함수.
+        switch (str)
+        {
+            case "Fire":
+                return 0;
+            case "Water":
+                return 1;
+            case "Spark":
+                return 2;
+            case "Ground":
+                return 3;
+        }
+        return -1;
     }
 }

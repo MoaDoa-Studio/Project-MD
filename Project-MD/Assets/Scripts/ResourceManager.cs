@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Linq;
+
 public class ResourceManager : MonoBehaviour
 {
     [SerializeField]
@@ -10,6 +12,26 @@ public class ResourceManager : MonoBehaviour
     private TextMeshProUGUI[] Secondary_Resource;
     [SerializeField]
     private GameObject Secondary_Resource_UI;
+    [SerializeField]
+    public int[] first_Source = new int[4]; // 1차 가공 원소 저장 배열
+  
+    private void Awake()
+    {
+        // 1차 가공원소 자원을 0개로 초기화
+       for(int i = 0; i < first_Source.Length; i++)
+       {
+           first_Source[i] = 0; // 0으로 초기화
+       }
+
+    }
+
+    private void Update()
+    {
+        for(int i = 0; i < first_Source.Length; i++)
+        {
+            First_Resource[i].text = first_Source[i].ToString();
+        }
+    }
     public void click_ResourceBar()
     {
         // 2차 원소 창이 켜져 있으면 끄고, 꺼져 있으면 켜고.
@@ -37,9 +59,10 @@ public class ResourceManager : MonoBehaviour
         if (resourceID == -1)
             return;
 
+        Debug.Log($"resourceID는 {resourceID} 입니다");
         // 초기화.        
-        int origin = int.Parse(First_Resource[resourceID].text);
-        First_Resource[resourceID].text = (origin + num).ToString();
+        //int origin = int.Parse(First_Resource[resourceID].text);
+        First_Resource[resourceID].text = (num).ToString();
 
         resourceID = -1;
     }

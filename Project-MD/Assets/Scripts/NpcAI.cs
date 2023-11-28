@@ -73,7 +73,7 @@ public class NpcAI : MonoBehaviour
         //[1] 목표지점 도착 판정 : 타겟과 자신과의 거리를 구해 도착판정
         float distance = Vector3.Distance(transform.position, target_wavepoint[wayPointIndex]);
 
-        Debug.Log("목표까지 남은 거리는 : " + distance);
+        //Debug.Log("목표까지 남은 거리는 : " + distance);
         if (distance < 0.2f)
         {
             StartCoroutine(waitsforMove());
@@ -128,8 +128,8 @@ public class NpcAI : MonoBehaviour
 
             target_wavepoint[i] = newChild.transform.position;
 
-            Debug.Log(i + "번째 위치는 : " + newChild.transform.position);
-            Debug.Log(i + "번째 target_wavepoint는  : " + target_wavepoint[i]);
+            //Debug.Log(i + "번째 위치는 : " + newChild.transform.position);
+            //Debug.Log(i + "번째 target_wavepoint는  : " + target_wavepoint[i]);
 
         }
 
