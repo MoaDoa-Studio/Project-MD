@@ -5,10 +5,11 @@ using UnityEngine;
 public class NpcAI : MonoBehaviour
 {
 
+    public int ID; // 캐릭터 고유 ID
+    public NpcDatabaseSO npc_database; //DB
     public float move_speed = 300f;
     public GameObject childPrefab;
     private int wayPointIndex = 0;
-    private int wayPointInex = 0;
     private Vector3[] target_wavepoint = new Vector3[7];
     private int selectednpcindex = -1;
     public enum Npcstates
@@ -125,12 +126,10 @@ public class NpcAI : MonoBehaviour
             Vector3 randomPosition = new Vector3(Random.Range(-3.5f, 3.5f), Random.Range(0, 0), Random.Range(-3.5f, 3.5f));
             newChild.transform.position = randomPosition;
 
-
             target_wavepoint[i] = newChild.transform.position;
 
             Debug.Log(i + "번째 위치는 : " + newChild.transform.position);
             Debug.Log(i + "번째 target_wavepoint는  : " + target_wavepoint[i]);
-
 
         }
 

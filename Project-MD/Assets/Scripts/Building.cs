@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class Building : MonoBehaviour
 {
     [SerializeField]
-    private int ID;
+    public int ID;
     
     public bool state; // 상태.
     public int pollution; // 오염도.

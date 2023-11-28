@@ -21,7 +21,9 @@ public class BuildingData
     [field: SerializeField]
     public string product { get; private set; } // 건물 생산품.
     [field: SerializeField]
-    public string productivity { get; private set; } // 건물 생산 속도.
+    public int productivity { get; private set; } // 건물 생산 속도.
+    [field: SerializeField]
+    public float max_productivity { get; private set; } // 건물 최대 생산량.
     [field: SerializeField]
     public Vector3Int size { get; private set; } = Vector3Int.one;
     [field: SerializeField]
