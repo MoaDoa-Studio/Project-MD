@@ -44,7 +44,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5077465731054081451}
   - component: {fileID: 6638237270688520077}
-  - component: {fileID: 6969761824643549137}
+  - component: {fileID: 6674616504681235270}
   m_Layer: 0
   m_Name: FIre_npc
   m_TagString: Untagged
@@ -120,7 +120,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6969761824643549137
+--- !u!114 &6674616504681235270
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -129,10 +129,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2799382482334021595}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4f45106240190647a65151bc8f6cec1, type: 3}
+  m_Script: {fileID: 11500000, guid: ed5ac8a086f9dfe4691eda75bd0bc28d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  move_speed: 0.1
+  move_speed: 0.2
   childPrefab: {fileID: 3987917741019062031, guid: 8e4897db019bfde4fb4914c7a04fc3cc, type: 3}
 --- !u!1 &3451461484270013407
 GameObject:

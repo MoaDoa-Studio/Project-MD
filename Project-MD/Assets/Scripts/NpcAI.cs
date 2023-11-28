@@ -10,12 +10,14 @@ public class NpcAI : MonoBehaviour
     private int wayPointIndex = 0;
     private int wayPointInex = 0;
     private Vector3[] target_wavepoint = new Vector3[7];
+    private int selectedcharacterindex = -1;
     public enum Npcstates
     {
         wandering,   // 배회
         factoryWork, // 자원 원소 공장 일
+        rest,        // 자원 공장 혹은 재화 건물 일하고 나서 대기 상태
         eat,         // 음식점에서 밥먹기
-        play        // 재화(여가) 건물에서 놀기
+        play         // 재화(여가) 건물에서 놀기
 
     }
     
@@ -33,6 +35,10 @@ public class NpcAI : MonoBehaviour
                 
                 break;
                 
+            case Npcstates.rest:
+            
+                break;
+            
             case Npcstates.eat: 
                 
                 break;
@@ -89,9 +95,20 @@ public class NpcAI : MonoBehaviour
         }
     }
 
+    // 캐릭터 정보를 xml로 긁어오는 함수
+    public void get_Npcvalues()
+    {
+        // npc 이름에 따라 원소 친화력 계수, // 현재는 selectedcharacterindex 값에 따라 캐릭터 판별
+
+        // 진화에 필요한 경험치 통 Lv2, Lv3
+        // npc 자체의 경험치 통
+        // npc 배고픔 통
+        
+    }
     private void factory()
     {
-        
+        // building 에서 일을 함에 따라 소요되는 배고픔 수치 감소
+        // 일 완료했고 대기
     }
 
     // 도착시 다음 포인터의 정보를 가져와서 타겟 설정
