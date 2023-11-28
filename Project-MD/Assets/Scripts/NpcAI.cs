@@ -10,7 +10,7 @@ public class NpcAI : MonoBehaviour
     private int wayPointIndex = 0;
     private int wayPointInex = 0;
     private Vector3[] target_wavepoint = new Vector3[7];
-    private int selectedcharacterindex = -1;
+    private int selectednpcindex = -1;
     public enum Npcstates
     {
         wandering,   // πË»∏

@@ -15,6 +15,8 @@ public class NpcData
     [field: SerializeField]
     public string name { get; private set;} //이름
     [field: SerializeField]
+    public int ID { get; private set;} // 고유 객체 번호
+    [field: SerializeField]
     public float hungry { get; private set;} //만복도
     [field: SerializeField]
     public float exp { get; private set;} //경험치
