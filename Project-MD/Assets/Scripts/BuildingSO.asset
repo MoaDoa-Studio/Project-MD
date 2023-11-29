@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingsData:
   - <name>k__BackingField: Red
+    <level>k__BackingField: 1
     <ID>k__BackingField: 0
     <type>k__BackingField: 0
     <product>k__BackingField: Fire
@@ -22,6 +23,7 @@ MonoBehaviour:
     <size>k__BackingField: {x: 1, y: 1, z: 1}
     <prefab>k__BackingField: {fileID: 3491096265742294583, guid: 89beaee306b618b448829dda0b5e1f43, type: 3}
   - <name>k__BackingField: Yellow
+    <level>k__BackingField: 1
     <ID>k__BackingField: 1
     <type>k__BackingField: 0
     <product>k__BackingField: Spark
@@ -30,6 +32,7 @@ MonoBehaviour:
     <size>k__BackingField: {x: 2, y: 1, z: 2}
     <prefab>k__BackingField: {fileID: 4659295805730941781, guid: 033f6ed6998d448438e5dbc7ea28946b, type: 3}
   - <name>k__BackingField: Blue
+    <level>k__BackingField: 1
     <ID>k__BackingField: 2
     <type>k__BackingField: 0
     <product>k__BackingField: Water
@@ -38,6 +41,7 @@ MonoBehaviour:
     <size>k__BackingField: {x: 3, y: 1, z: 2}
     <prefab>k__BackingField: {fileID: 1523121661255982419, guid: 8a6f8d36ef332c845aa43ea28bb38266, type: 3}
   - <name>k__BackingField: White
+    <level>k__BackingField: 1
     <ID>k__BackingField: 3
     <type>k__BackingField: 0
     <product>k__BackingField: Ground

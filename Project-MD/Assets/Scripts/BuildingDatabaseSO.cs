@@ -15,6 +15,8 @@ public class BuildingData
     [field: SerializeField]
     public string name { get; private set; } // 이름
     [field: SerializeField]
+    public int level { get; private set; } // 이름
+    [field: SerializeField]
     public int ID { get; private set; } // 건물 ID
     [field: SerializeField]
     public int type { get; private set; } // 건물 타입.

@@ -2239,6 +2239,7 @@ GameObject:
   - component: {fileID: 363313402}
   - component: {fileID: 363313403}
   - component: {fileID: 363313404}
+  - component: {fileID: 363313405}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -2277,6 +2278,7 @@ MonoBehaviour:
   builderManager: {fileID: 363313401}
   inputManager: {fileID: 363313402}
   resourceManager: {fileID: 363313403}
+  buildingInfo: {fileID: 0}
 --- !u!114 &363313401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2364,6 +2366,26 @@ MonoBehaviour:
   - {fileID: 437585824}
   - {fileID: 350092725}
   - {fileID: 1014637846}
+--- !u!114 &363313405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 363313397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc51b73460a212f45a00565c569c9618, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  build_info: {fileID: 1662921825}
+  buildInfo:
+  - {fileID: 782920772}
+  - {fileID: 1034313506}
+  - {fileID: 833298978}
+  - {fileID: 9104331}
+  - {fileID: 2140786979}
+  - {fileID: 293622767}
 --- !u!1 &364807641
 GameObject:
   m_ObjectHideFlags: 0
@@ -2966,7 +2988,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &494579166
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6580,7 +6602,7 @@ GameObject:
   - component: {fileID: 1034313507}
   - component: {fileID: 1034313506}
   m_Layer: 5
-  m_Name: State_Text
+  m_Name: Level_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6625,7 +6647,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'State :'
+  m_text: 'Level :'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

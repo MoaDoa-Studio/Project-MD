@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Npc_Info_UI : MonoBehaviour
 {
-
+    // UI 세팅.
     string naming;
     int ID;
     float hungry;
@@ -17,7 +17,7 @@ public class Npc_Info_UI : MonoBehaviour
 
     public GameObject npc_info;
     [SerializeField]
-    private TextMeshProUGUI[] NpcInfo; // 건물 상태창 인포.
+    private TextMeshProUGUI[] NpcInfo; // npc Info.
   
     public void get_Values(string _name, int _ID, float _hungry, float _exp, string _state, int _level, float _Affiniity, GameObject _prefab)
     {

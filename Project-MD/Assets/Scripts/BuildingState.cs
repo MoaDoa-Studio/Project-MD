@@ -22,6 +22,7 @@ public class BuildingState : MonoBehaviour
     public int totalproductivity;
     private int max_productivitydefault; // 임시 최대 생산량.
     private Building building;
+    private Building_Info_UI buildInfo;
     private GameObject gameManager;
     private ResourceManager resourceManager;
     private BuilderManager builderManager;
@@ -43,6 +44,7 @@ public class BuildingState : MonoBehaviour
     void Start()
     {
         building = this.GetComponent<Building>();
+        buildInfo = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Building_Info_UI>();
         resourceManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ResourceManager>();
         builderManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<BuilderManager>();   
         totalPdBar = Building_Info.transform.Find("Fill").GetComponent<Image>();
@@ -140,5 +142,16 @@ public class BuildingState : MonoBehaviour
                 return 3;
         }
         return -1;
+    }
+
+    // Build_Info UI 세팅
+    private void OnMouseDown()
+    {
+        Debug.Log("build UI가 눌렸습니다!");
+        buildInfo.get_Values(buildingDatabase.buildingsData[ID].name, buildingDatabase.buildingsData[ID].level,
+        buildingDatabase.buildingsData[ID].ID, buildingDatabase.buildingsData[ID].type,
+        buildingDatabase.buildingsData[ID].product, buildingDatabase.buildingsData[ID].
+        productivity, buildingDatabase.buildingsData[ID].max_productivity,
+        buildingDatabase.buildingsData[ID].size, buildingDatabase.buildingsData[ID].prefab);
     }
 }

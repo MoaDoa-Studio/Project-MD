@@ -43,7 +43,7 @@ public class NpcStat : MonoBehaviour
     // UI 동기화 정보값 넘김.
     private void OnMouseDown()
     {
-        Debug.Log("눌렸습니다!");
+        Debug.Log("npc UI가 눌렸습니다!");
         npcInfo.get_Values(npc_database.npcData[iD].name, npc_database.npcData[iD].ID,
         npc_database.npcData[iD].hungry, npc_database.npcData[iD].exp,
         npc_database.npcData[iD].state, npc_database.npcData[iD].level, npc_database.npcData[iD].Affinity, npc_database.npcData[iD].prefab);
