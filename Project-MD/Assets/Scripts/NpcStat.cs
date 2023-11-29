@@ -7,8 +7,8 @@ public class NpcStat : MonoBehaviour
 {
     public NpcDatabaseSO npc_database;
     private NpcAI npcAI;
-
-    private string names;
+    [HideInInspector]
+    public string names;
     private string state;
     private float affinity;
     private int iD;
