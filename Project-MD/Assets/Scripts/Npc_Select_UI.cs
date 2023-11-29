@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Npc_Select_UI : MonoBehaviour
 {
+    int number = 0;
+
     [SerializeField]
     private List<GameObject> npc_ObjectList = new List<GameObject>();
     private List<int> npc_Id = new List<int>();
-    private List<GameObject> buttonArr = new List<GameObject>(); // buttonArr 생성된 버튼배열 체크
+    private Button[] npcButtons; // buttonArr 생성된 버튼배열 체크
     public GameObject Content;
     public GameObject buttonprefab;
     void Update()
@@ -16,8 +19,9 @@ public class Npc_Select_UI : MonoBehaviour
         GameObject[] npcObjects = GameObject.FindGameObjectsWithTag("Npc");
        
         // npcObjects 배열의 각 요소를 npc_ObjectList에 추가.
-        foreach (GameObject npcObj in npcObjects)
-        {   
+        for(int i = 0; i < npcObjects.Length; i++)
+        {
+            GameObject npcObj = npcObjects[i];
             // 새로운 오브젝트 있을때마다 리스트에 추가.
             if (!npc_ObjectList.Contains(npcObj))
             {
@@ -26,14 +30,36 @@ public class Npc_Select_UI : MonoBehaviour
                 // 해당 갯수에 맞춰서 Button을 생성.
                 if (Content != null)
                 {   // 부모의 자식 오브젝트로 생성.
-                    GameObject newButton = Instantiate(buttonprefab, Content.transform);
-                    buttonArr.Add(newButton); //
-                    newButton.GetComponentInChildren<Text>().text = npcObj.GetComponent<NpcStat>().names;
+                    GameObject button = Instantiate(buttonprefab, Content.transform);
+                    button.GetComponentInChildren<Text>().text = npcObj.GetComponent<NpcStat>().names;
+                    int index = i;
+                    npcButtons = Content.GetComponentsInChildren<Button>();
+                    npcButtons[i].onClick.AddListener(() => OnButtonClick(index));  
                 }
             }
+
+
+
+
+        
+           
         }
 
         // 눌린 버튼의 i값을 가져오면서 해당 npc 정보값을 가져옴 => 건물 생산량 업데이트 / 필드에서 해당 오브젝트 사라지게하기
     }
+
+    // UI 버튼 클릭 되어졌을 때.
+    void OnButtonClick(int buttonIndex)
+    {
+        Debug.Log("Button clicked! Index: " + buttonIndex);
+        Debug.Log("선택되어진 npc는 : " + npc_ObjectList[buttonIndex]);
+    }
+    
+
+
+
+
+
+
 
 }
