@@ -16,13 +16,19 @@ public class Building_Info_UI : MonoBehaviour
     Vector3Int size;
     GameObject prefab;
 
+    [HideInInspector]
+    public GameObject select_UI;
+    [HideInInspector]
     public GameObject build_info;
+
     [SerializeField]
     private TextMeshProUGUI[] buildInfo; // 건물상태 Info.
     private BuildingDatabaseSO buildDB; // DB 
+    private BuildingState buildState; 
+
     private void Start()
     {
-       
+        buildState = this.GetComponent<BuildingState>();  
     }
     public void get_Values(string _name,int _level, int _ID, int _type, string _product, int _productivity, int _max_productivity, Vector3Int _size, GameObject _prefab)
     {
@@ -49,4 +55,13 @@ public class Building_Info_UI : MonoBehaviour
 
     }
 
+    // Npc_select_UI와 buildstat 동기화.
+    public void set_NpcselectUI()
+    {
+        select_UI.SetActive(true);
+        // 어떤 빌딩 stat인지 전달해줘야함
+        this.GetComponent<Npc_Select_UI>().select_Buildsync(prefab);
+        Debug.Log($"selectUI로 {prefab}이 추가됨");
+       
+    }
 }

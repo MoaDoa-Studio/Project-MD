@@ -6,18 +6,22 @@ using UnityEngine.UI;
 
 public class BuildingState : MonoBehaviour
 {
+    
+
     [SerializeField]
     private float making_cooltime = 5f;
     [SerializeField]
     private float reset_cooltime = 5f;
     [SerializeField]
     private GameObject Building_Info; // 건물 상태창 UI Info.
-    
+    [SerializeField]
+    private GameObject chosen_Npc = null;   // 공장에서 일하는 npc
     public BuildingDatabaseSO buildingDatabase; // 빌딩 DB
     private int ID;
     private bool state = false;
     private string product;
     private int productivity;
+    private int bonus_productivity;
     public int totalproductivity;
     private int max_productivitydefault; // 임시 최대 생산량.
     private Building building;
@@ -25,10 +29,12 @@ public class BuildingState : MonoBehaviour
     private GameObject gameManager;
     private ResourceManager resourceManager;
     private BuilderManager builderManager;
-    
+    private Npc_Select_UI npcSelect;
+
     // Builder 하위 UI들.
     private Image totalPdBar;
-    public GameObject state_icon;
+    public GameObject state_icon; // 공장 가동, 생산완료 아이콘.
+    public GameObject select_UI;
     
     public enum BuildingStat
     {
@@ -43,6 +49,7 @@ public class BuildingState : MonoBehaviour
     void Start()
     {
         building = this.GetComponent<Building>();
+        npcSelect = this.GetComponent<Npc_Select_UI>();
         buildInfo = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Building_Info_UI>();
         resourceManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ResourceManager>();
         builderManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<BuilderManager>();   
@@ -71,7 +78,7 @@ public class BuildingState : MonoBehaviour
                 break;
             case BuildingStat.Run:
                 Debug.Log("Run 상태 실행됨");
-                state_icon.SetActive(false);
+                
                 Running_build();
                 
                 break;
@@ -86,6 +93,7 @@ public class BuildingState : MonoBehaviour
     {
         //슬라이더 항상.
         //totalPdBar.fillAmount = (float)totalproductivity / (float)max_productivitydefault;
+        
         // 총 생산량을 초과했을때 상태전환.
         if (totalproductivity >= max_productivitydefault)
         {
@@ -125,6 +133,12 @@ public class BuildingState : MonoBehaviour
         // npc를 추가하거나 
     }
 
+    // select UI에서 호출
+    public void get_buildNpcInfo(GameObject _npcObject)
+    {
+        chosen_Npc = _npcObject;
+        Debug.Log("Chosen_npc는 : " +  chosen_Npc);
+    }
 
     private int getResourceID(string str)
     {

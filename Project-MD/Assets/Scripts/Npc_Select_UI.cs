@@ -9,11 +9,16 @@ public class Npc_Select_UI : MonoBehaviour
     int number = 0;
 
     [SerializeField]
-    private List<GameObject> npc_ObjectList = new List<GameObject>();
+    public List<GameObject> npc_ObjectList = new List<GameObject>();
     private List<int> npc_Id = new List<int>();
+    private BuildingState buildingState;
     private Button[] npcButtons; // buttonArr 생성된 버튼배열 체크
     public GameObject Content;
     public GameObject buttonprefab;
+    private GameObject selectedNpc; // 일하는 정령
+    private GameObject buildprefab; // 선택된 건물
+
+   
     void Update()
     {   // Npc 태그로 찾은 오브젝트 배열로 받음.
         GameObject[] npcObjects = GameObject.FindGameObjectsWithTag("Npc");
@@ -53,13 +58,16 @@ public class Npc_Select_UI : MonoBehaviour
     {
         Debug.Log("Button clicked! Index: " + buttonIndex);
         Debug.Log("선택되어진 npc는 : " + npc_ObjectList[buttonIndex]);
+        selectedNpc = npc_ObjectList[buttonIndex];
+        // 클릭 누르기 전에 동기화
+        buildingState = buildprefab.GetComponent<BuildingState>();
+        buildingState.get_buildNpcInfo(selectedNpc);
     }
-    
-
-
-
-
-
-
+    public void select_Buildsync(GameObject _buildObj)
+    {
+        buildprefab = _buildObj;
+        Debug.Log("select와 건물이 연결이 완료되었음");
+    }
+   
 
 }
