@@ -41,4 +41,8 @@ public class Npc_Info_UI : MonoBehaviour
         NpcInfo[5].text = "state : " +_state;
     }
 
+    private void Update()
+    {
+        // 슬라이더 || 정령 선택창 ||  정령 투입
+    }
 }

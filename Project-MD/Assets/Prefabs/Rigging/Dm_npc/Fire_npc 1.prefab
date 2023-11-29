@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2354423118333226171}
   m_Layer: 0
   m_Name: Fire_npc 1
-  m_TagString: Untagged
+  m_TagString: Npc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -50,6 +50,7 @@ MonoBehaviour:
   ID: 2
   move_speed: 0.3
   childPrefab: {fileID: 3987917741019062031, guid: 8e4897db019bfde4fb4914c7a04fc3cc, type: 3}
+  factoryWork: 0
 --- !u!65 &2276462646123446086
 BoxCollider:
   m_ObjectHideFlags: 0

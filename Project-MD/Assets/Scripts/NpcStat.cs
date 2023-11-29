@@ -40,7 +40,7 @@ public class NpcStat : MonoBehaviour
         
     }
 
-    // UI 동기화 정보값 넘김.
+    // npc UI 동기화 정보값 넘김.
     private void OnMouseDown()
     {
         Debug.Log("npc UI가 눌렸습니다!");

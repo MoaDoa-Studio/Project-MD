@@ -9,6 +9,7 @@ TagManager:
   - WayPoints
   - GameManager
   - Npc_info
+  - Npc
   layers:
   - Default
   - TransparentFX

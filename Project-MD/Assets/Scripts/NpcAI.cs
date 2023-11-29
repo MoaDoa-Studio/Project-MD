@@ -5,14 +5,14 @@ using UnityEngine.UIElements;
 
 public class NpcAI : MonoBehaviour
 {
-
-    public int ID; // 캐릭터 고유 ID
-    private Npc_Info_UI npcInfo;
+    
+    public int ID; // 캐릭터 고유 ID.
     public float move_speed = 300f;
     public GameObject childPrefab;
+    public bool factoryWork = false; // 작업 상태.
     private int wayPointIndex = 0;
+    private Npc_Info_UI npcInfo;
     private Vector3[] target_wavepoint = new Vector3[7];
-    private int selectednpcindex = -1;
     public enum Npcstates
     {
         wandering,   // 배회
@@ -38,10 +38,10 @@ public class NpcAI : MonoBehaviour
         switch(npcstates)
         {
             case Npcstates.wandering:
-                wander();
+                walking();
                 break;
-            case Npcstates.factoryWork: 
-                
+            case Npcstates.factoryWork:
+                factory_Mode();
                 break;
                 
             case Npcstates.rest:
@@ -63,12 +63,26 @@ public class NpcAI : MonoBehaviour
         UpdateState();
     }
 
-    private void wander()
+
+    // 공장에서 일하는 형태로 전환.
+     public void factory_Mode()
+    {
+        // building 에서 일을 함에 따라 소요되는 배고픔 수치 감소.
+        // npc state에서 배고픔 감소, 경험치 증가, 정령 상태 초기화
+        
+        // 일 완료했고 대기.
+    }
+
+    // 걷는 상태.
+    private void walking()
     {
         // 다른 선택지가 주어지면 상태 변환
        
         // 버튼이 눌리면 잠시 멈추는 상태가 되어야함
-        
+        if(factoryWork == true)
+        {
+            npcstates = Npcstates.factoryWork;
+        }
         // 움직임을 멈추는 상태가 되어야함
 
         // 마지막처리가
@@ -100,15 +114,7 @@ public class NpcAI : MonoBehaviour
             }
         }
     }
-
-    // 캐릭터 정보를 xml로 긁어오는 함수
-     private void factory()
-    {
-        // building 에서 일을 함에 따라 소요되는 배고픔 수치 감소
-        // 일 완료했고 대기
-    }
-
-    // 도착시 다음 포인터의 정보를 가져와서 타겟 설정
+    // 도착시 다음 포인터의 정보를 가져와서 타겟 설정.
     private void GetNextPoint()
     {   // 다음 waypoint로 지정
         wayPointIndex++;
@@ -131,6 +137,7 @@ public class NpcAI : MonoBehaviour
 
     }
 
+    // 목적지 도착 후 잠시 쉬기.
      IEnumerator waitsforMove()
     {
         GetNextPoint();

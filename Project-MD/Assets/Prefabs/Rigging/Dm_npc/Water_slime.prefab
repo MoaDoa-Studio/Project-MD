@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9077923398118564982}
   m_Layer: 0
   m_Name: Water_slime
-  m_TagString: Untagged
+  m_TagString: Npc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,9 +48,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: 0
-  npc_database: {fileID: 0}
   move_speed: 0.4
   childPrefab: {fileID: 3987917741019062031, guid: 8e4897db019bfde4fb4914c7a04fc3cc, type: 3}
+  factoryWork: 0
 --- !u!65 &5106397076177918274
 BoxCollider:
   m_ObjectHideFlags: 0

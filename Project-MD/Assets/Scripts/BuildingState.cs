@@ -18,7 +18,6 @@ public class BuildingState : MonoBehaviour
     private bool state = false;
     private string product;
     private int productivity;
-    
     public int totalproductivity;
     private int max_productivitydefault; // 임시 최대 생산량.
     private Building building;
