@@ -25,7 +25,7 @@ public class NpcData
     [field: SerializeField]
     public int level { get; private set;} //정령 레벨
     [field: SerializeField]
-    public float Affinity_f { get; private set;} // 특성 불 친화력
+    public float Affinity { get; private set;} // 특성 불 친화력
     [field: SerializeField]
     public float Affinity_w { get; private set;} // 특성 물 친화력
     [field: SerializeField]

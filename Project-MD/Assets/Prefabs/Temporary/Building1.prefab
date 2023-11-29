@@ -112,12 +112,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 641ddff8eb71cd24bb36d26ed1cba269, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state_icon: {fileID: 0}
-  spriteimg: {fileID: 0}
   making_cooltime: 5
   reset_cooltime: 5
+  Building_Info: {fileID: 0}
   buildingDatabase: {fileID: 11400000, guid: e9e1161cb6f1b71428145ae99553eba0, type: 2}
-  buildingstat: 0
+  totalproductivity: 0
+  state_icon: {fileID: 0}
 --- !u!1 &5160217588954854116
 GameObject:
   m_ObjectHideFlags: 0

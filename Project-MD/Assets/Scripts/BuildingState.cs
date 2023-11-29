@@ -6,25 +6,30 @@ using UnityEngine.UI;
 
 public class BuildingState : MonoBehaviour
 {
-    public GameObject state_icon;
-    public Sprite spriteimg;
-    public Image totalPdBar;
-    private int ID;
     [SerializeField]
     private float making_cooltime = 5f;
     [SerializeField]
     private float reset_cooltime = 5f;
+    [SerializeField]
+    private GameObject Building_Info; // 건물 상태창 UI Info.
+    
+    public BuildingDatabaseSO buildingDatabase; // 빌딩 DB
+    private int ID;
     private bool state = false;
     private string product;
     private int productivity;
-    private int totalproductivity;
-    private int max_productivitydefault; // 임시 default 값
+    
+    public int totalproductivity;
+    private int max_productivitydefault; // 임시 최대 생산량.
     private Building building;
     private GameObject gameManager;
     private ResourceManager resourceManager;
-
-    public BuildingDatabaseSO buildingDatabase; // DB
-
+    private BuilderManager builderManager;
+    
+    // Builder 하위 UI들.
+    private Image totalPdBar;
+    public GameObject state_icon;
+    
     public enum BuildingStat
     {
         Idle,
@@ -32,26 +37,27 @@ public class BuildingState : MonoBehaviour
         Stopwork
     }
 
-    public BuildingStat buildingstat = BuildingStat.Run; // 기본상태로 초기화
+    private BuildingStat buildingstat = BuildingStat.Run; // 기본상태로 초기화
 
     // Start is called before the first frame update
     void Start()
     {
         building = this.GetComponent<Building>();
-        resourceManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ResourceManager>(); 
+        resourceManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ResourceManager>();
+        builderManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<BuilderManager>();   
+        totalPdBar = Building_Info.transform.Find("Fill").GetComponent<Image>();
         ID = building.ID; // 프리팹의 ID값 DB로 빌딩스텟 관리 
         product = buildingDatabase.buildingsData[ID].product; // 생산하는 원소자원
         productivity = buildingDatabase.buildingsData[ID].productivity; // 건물 생산 속도
         max_productivitydefault = buildingDatabase.buildingsData[ID].max_productivity; // 최대 생산량
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        //슬라이더는 항상 보여줌
-        totalPdBar.fillAmount = totalproductivity / max_productivitydefault;
+       // Swicth문 벗어남.
 
+       
         UpdateState();
     }
 
@@ -60,13 +66,16 @@ public class BuildingState : MonoBehaviour
         switch(buildingstat)
         {
             case BuildingStat.Idle:
-                state_icon.SetActive(false);
-                Running_build();
+                Debug.Log("Idle 상태가 실행되기는 함");
                 break;
             case BuildingStat.Run:
+                Debug.Log("Run 상태 실행됨");
+                state_icon.SetActive(false);
+                Running_build();
                 
                 break;
             case BuildingStat.Stopwork:
+                Debug.Log("StopWork가 실행됨");
                 stoped_build();
                 break;
         }
@@ -74,18 +83,18 @@ public class BuildingState : MonoBehaviour
 
     void Running_build()
     {
-        // 가동중일때 나타나는 sprite image
-        // state_icon.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Icons/cycling");
-        
-        // 총 생산량을 초과했을때 상태전환
-        if(totalproductivity >= max_productivitydefault)
+        //슬라이더 항상.
+        //totalPdBar.fillAmount = (float)totalproductivity / (float)max_productivitydefault;
+        // 총 생산량을 초과했을때 상태전환.
+        if (totalproductivity >= max_productivitydefault)
         {
-            state_icon.SetActive(true);
+            totalproductivity = 0;
+            
             buildingstat = BuildingStat.Stopwork; // 그만 일하세욧!
 
         }
 
-        // 생산량 쿨타임 적용
+        // 생산량 쿨타임 적용.
         if(making_cooltime <= 0)
         {
             // 생산을 합시다!! 
@@ -93,24 +102,26 @@ public class BuildingState : MonoBehaviour
            
             totalproductivity += productivity;
             Debug.Log($"전체 :{max_productivitydefault} // 에서 현재 {totalproductivity}만큼 쌓여있습니다");
-            // 최대 생산량 초과
+            // 최대 생산량 초과.
             if(totalproductivity >= max_productivitydefault)
             {
                 totalproductivity = max_productivitydefault;
                 Debug.Log($"전체 보유랑을 {max_productivitydefault}를 초과하여 {totalproductivity}만큼 저장되었습니다");
+
+                resourceManager.first_Source[resourceID] += max_productivitydefault;
+
             }
             making_cooltime = reset_cooltime; // 쿨타임 초기화
         }
         making_cooltime -= Time.deltaTime;
     }
 
-    // 공장 생산량 초과로 npc가 대기중인 상탠
+    // 공장 생산량 초과로 npc가 대기중인 상태.
     void stoped_build()
     {   
-        // 생산이 완료된 sprite image ?? 개발 미구현
-        
-        // 아이콘을 눌렀을 때 자원을 더함 => BuilderManager실행
-        
+        // npc 자체가 대기중인 상태
+
+        // npc를 추가하거나 
     }
 
 

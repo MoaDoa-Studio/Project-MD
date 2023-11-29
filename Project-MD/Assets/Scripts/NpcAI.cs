@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class NpcAI : MonoBehaviour
 {
 
     public int ID; // 캐릭터 고유 ID
-    public NpcDatabaseSO npc_database; //DB
+    private Npc_Info_UI npcInfo;
     public float move_speed = 300f;
     public GameObject childPrefab;
     private int wayPointIndex = 0;
@@ -24,6 +25,13 @@ public class NpcAI : MonoBehaviour
     
     // Npc 상태 초기화
     private Npcstates npcstates = Npcstates.wandering;
+    private void Start()
+    {
+        npcInfo = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Npc_Info_UI>();
+        npc_Build();
+        target_wavepoint[0] = transform.position;
+        wayPointIndex++;
+    }
 
     public void UpdateState()
     {
@@ -50,12 +58,6 @@ public class NpcAI : MonoBehaviour
 
         }
     }
-    private void Start()
-    {
-        npc_Build();
-        target_wavepoint[0] = transform.position;
-        wayPointIndex++;
-    }
     private void Update()
     {
         UpdateState();
@@ -64,6 +66,9 @@ public class NpcAI : MonoBehaviour
     private void wander()
     {
         // 다른 선택지가 주어지면 상태 변환
+       
+        // 버튼이 눌리면 잠시 멈추는 상태가 되어야함
+        
         // 움직임을 멈추는 상태가 되어야함
 
         // 마지막처리가
@@ -97,16 +102,7 @@ public class NpcAI : MonoBehaviour
     }
 
     // 캐릭터 정보를 xml로 긁어오는 함수
-    public void get_Npcvalues()
-    {
-        // npc 이름에 따라 원소 친화력 계수, // 현재는 selectedcharacterindex 값에 따라 캐릭터 판별
-
-        // 진화에 필요한 경험치 통 Lv2, Lv3
-        // npc 자체의 경험치 통
-        // npc 배고픔 통
-        
-    }
-    private void factory()
+     private void factory()
     {
         // building 에서 일을 함에 따라 소요되는 배고픔 수치 감소
         // 일 완료했고 대기
@@ -135,7 +131,7 @@ public class NpcAI : MonoBehaviour
 
     }
 
-    IEnumerator waitsforMove()
+     IEnumerator waitsforMove()
     {
         GetNextPoint();
         yield return new WaitForSeconds(7f);

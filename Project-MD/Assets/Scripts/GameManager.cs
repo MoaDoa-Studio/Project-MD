@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public BuilderManager builderManager;    
     public InputManager inputManager;
     public ResourceManager resourceManager;
+   
     private void Awake()
     {
         if (instance == null)

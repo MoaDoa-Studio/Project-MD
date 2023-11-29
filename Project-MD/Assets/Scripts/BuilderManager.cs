@@ -25,6 +25,8 @@ public class BuilderManager : MonoBehaviour
     private GameObject BuildingInfo_UI; // 건물 상태창 UI.
     [SerializeField]
     private TextMeshProUGUI[] BuildingInfo; // 건물 상태창 인포.
+    [SerializeField]
+    private GameObject interacting_Build; // 버튼 v -와 동기화시킬 건물
 
     private int selectedObjectIndex = -1; // 선택된 건물 인덱스.
     private GameObject mouseIndicator; // 현재 선택된 건물 저장.
@@ -317,11 +319,4 @@ public class BuilderManager : MonoBehaviour
         BuildingInfo[5].text = "Max_Product : "; // 최대생산량
     }
 
-    // building_info UI V-체크 누를시에
-    public void check_Addresource()
-    {
-        resourceManager.first_Source[selectedObjectIndex] += database.buildingsData[selectedObjectIndex].max_productivity;
-       
-        Inquire.SetActive(false);
-    }
 }
