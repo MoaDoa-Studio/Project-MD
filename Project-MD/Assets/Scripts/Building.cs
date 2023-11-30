@@ -34,7 +34,7 @@ public class Building : MonoBehaviour
     {                
         if (GameManager.instance.builderManager.get_BuilderMode() == 0)
         {
-          //  GameManager.instance.builderManager.set_BuildingInfo(ID, state, pollution);
+            GameManager.instance.builderManager.set_BuildingInfo(ID, state, pollution);
             
             return;
         }        

@@ -198,8 +198,11 @@ public class BuilderManager : MonoBehaviour
         // 불러온 데이터 건물 생성.
         if (mouseIndicator != null)
             Destroy(mouseIndicator);
-        mouseIndicator = Instantiate(database.buildingsData[selectedObjectIndex].prefab, grid.CellToWorld(gridPos), Quaternion.identity, instance_Parent.transform);        
+        mouseIndicator = Instantiate(database.buildingsData[selectedObjectIndex].prefab, grid.CellToWorld(gridPos), Quaternion.identity, instance_Parent.transform);
 
+        // 건물 생성 후 buildstate = true;
+        //database.buildingsData[selectedObjectIndex].prefab.GetComponent<BuildingState>().built = true;
+       
         // 셀 인디케이터 액티브 및 사이즈 할당.        
         cellIndicator.transform.localPosition = grid.CellToWorld(gridPos);
         Vector3Int prefab_size = database.buildingsData[selectedObjectIndex].size;
