@@ -22,16 +22,8 @@ public class ResourceManager : MonoBehaviour
        {
            first_Source[i] = 0; // 0으로 초기화
        }
-
     }
-
-    private void Update()
-    {
-        for(int i = 0; i < first_Source.Length; i++)
-        {
-            First_Resource[i].text = first_Source[i].ToString();
-        }
-    }
+    
     public void click_ResourceBar()
     {
         // 2차 원소 창이 켜져 있으면 끄고, 꺼져 있으면 켜고.
@@ -58,11 +50,10 @@ public class ResourceManager : MonoBehaviour
         int resourceID = getResourceID(str);
         if (resourceID == -1)
             return;
-
-        Debug.Log($"resourceID는 {resourceID} 입니다");
+        
         // 초기화.        
-        //int origin = int.Parse(First_Resource[resourceID].text);
-        First_Resource[resourceID].text = (num).ToString();
+        int value = int.Parse(First_Resource[resourceID].text) + num;
+        First_Resource[resourceID].text = value.ToString();
 
         resourceID = -1;
     }
