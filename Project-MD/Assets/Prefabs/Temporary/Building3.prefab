@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 555358667154783059}
   - component: {fileID: 3003307128193351563}
   - component: {fileID: 4452813637508895816}
+  - component: {fileID: -7925219969090484015}
   m_Layer: 0
   m_Name: Building3
   m_TagString: Building
@@ -48,6 +49,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: 2
+  state: 0
+  pollution: 0
   isCollide: 0
 --- !u!65 &3003307128193351563
 BoxCollider:
@@ -97,6 +100,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &-7925219969090484015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1523121661255982419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 641ddff8eb71cd24bb36d26ed1cba269, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  making_cooltime: 5
+  reset_cooltime: 5
+  Building_Info: {fileID: 0}
+  buildingDatabase: {fileID: 11400000, guid: e9e1161cb6f1b71428145ae99553eba0, type: 2}
+  totalproductivity: 0
+  state_icon: {fileID: 0}
 --- !u!1 &7978698673882212266
 GameObject:
   m_ObjectHideFlags: 0

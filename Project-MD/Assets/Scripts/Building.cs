@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class Building : MonoBehaviour
 {
     [SerializeField]
-    private int ID;
+    public int ID;
     
     public bool state; // »óÅÂ.
     public int pollution; // ¿À¿°µµ.
@@ -34,7 +34,8 @@ public class Building : MonoBehaviour
     {                
         if (GameManager.instance.builderManager.get_BuilderMode() == 0)
         {
-            GameManager.instance.builderManager.set_BuildingInfo(ID, state, pollution);
+          //  GameManager.instance.builderManager.set_BuildingInfo(ID, state, pollution);
+            
             return;
         }        
         else if (GameManager.instance.builderManager.get_BuilderMode() == 1)

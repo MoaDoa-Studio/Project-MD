@@ -16,6 +16,8 @@ public class BuilderManager : MonoBehaviour
     [SerializeField]
     public BuildingDatabaseSO database; // 빌딩 DB        
     [SerializeField]
+    public ResourceManager resourceManager; // 빌딩 DB        
+    [SerializeField]
     private GameObject Builder_UI;
     [SerializeField]
     private GameObject GridLine; // 그리드 표시
@@ -23,6 +25,8 @@ public class BuilderManager : MonoBehaviour
     private GameObject BuildingInfo_UI; // 건물 상태창 UI.
     [SerializeField]
     private TextMeshProUGUI[] BuildingInfo; // 건물 상태창 인포.
+    [SerializeField]
+    private GameObject interacting_Build; // 버튼 v -와 동기화시킬 건물
 
     private int selectedObjectIndex = -1; // 선택된 건물 인덱스.
     private GameObject mouseIndicator; // 현재 선택된 건물 저장.
@@ -34,7 +38,8 @@ public class BuilderManager : MonoBehaviour
     private Button Fix;
     private Button Cancel;
     private Button Quit;
-
+    private GameObject Inquire;
+    
     BuilderMode builderMode;
     enum BuilderMode
     {
@@ -53,11 +58,12 @@ public class BuilderManager : MonoBehaviour
         // 하위 UI 할당.
         Center_UI = Builder_UI.transform.Find("Center_UI").gameObject;
         Right_UI = Builder_UI.transform.Find("Right_UI").gameObject;
+        Inquire = BuildingInfo_UI.transform.Find("Inquire").gameObject;
         Relocate = Right_UI.transform.Find("Relocate").GetComponent<Button>();
         Fix = Right_UI.transform.Find("Fix").GetComponent<Button>();
         Cancel = Right_UI.transform.Find("Cancel").GetComponent<Button>();
         Quit = Right_UI.transform.Find("Quit").GetComponent<Button>();
-       
+        resourceManager = this.GetComponent<ResourceManager>();
         // 초기화.
         StopMove();
         builderMode = BuilderMode.No;
@@ -281,7 +287,7 @@ public class BuilderManager : MonoBehaviour
         Vector3 centerPos = GameManager.instance.inputManager.get_CenterPosition();
         centerPos.y = 0;
         Vector3Int gridPos = grid.WorldToCell(centerPos);
-        return gridPos;
+        return gridPos;   
     }
     private void set_CellIndicator(Vector3Int size, Vector3 child_Pos)
     {
@@ -302,7 +308,7 @@ public class BuilderManager : MonoBehaviour
         }
 
         BuildingInfo_UI.SetActive(true);
-        BuildingInfo[0].text = "Name : " + database.buildingsData[selectedObjectIndex].name;
+        BuildingInfo[0].text = "Name : " + database  .buildingsData[selectedObjectIndex].name;
         BuildingInfo[1].text = "State : " + state;
         BuildingInfo[2].text = "Product : " + database.buildingsData[selectedObjectIndex].product;
         BuildingInfo[3].text = "Productivity : " + database.buildingsData[selectedObjectIndex].productivity;        
@@ -310,6 +316,7 @@ public class BuilderManager : MonoBehaviour
 
         // 슬라이더 값으로 조절할거니깐 나중에.
         //BuildingInfo[5].text = "Hungry : ";
-        //BuildingInfo[6].text = "EXP : ";
+        BuildingInfo[5].text = "Max_Product : "; // 최대생산량
     }
+
 }
