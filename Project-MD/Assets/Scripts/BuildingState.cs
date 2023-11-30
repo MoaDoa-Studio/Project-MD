@@ -43,7 +43,6 @@ public class BuildingState : MonoBehaviour
 
     private BuildingStat buildingstat = BuildingStat.Run; // 기본상태로 초기화
 
-    // Start is called before the first frame update
     void Start()
     {
         building = this.GetComponent<Building>();
@@ -51,7 +50,6 @@ public class BuildingState : MonoBehaviour
         buildInfo = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Building_Info_UI>();
         resourceManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ResourceManager>();
         builderManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<BuilderManager>();   
-        totalPdBar = Building_Info.transform.Find("Fill").GetComponent<Image>();
         ID = building.ID; // 프리팹의 ID값 DB로 빌딩스텟 관리 
         product = buildingDatabase.buildingsData[ID].product; // 생산하는 원소자원
         productivity = buildingDatabase.buildingsData[ID].productivity; // 건물 생산 속도
@@ -59,13 +57,11 @@ public class BuildingState : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void Update()
     {
        // Swicth문 벗어남.
 
-       
-       // UpdateState();
+        UpdateState();
     }
 
     public void UpdateState()
@@ -74,26 +70,29 @@ public class BuildingState : MonoBehaviour
         {
             case BuildingStat.RunwithNpc:
                 Debug.Log("Run && Npc 상태");
-                Debug.Log("정령 가공에서 일하고 있는 정령의 이름은 : " + chosen_Npc);           
-                
+                Debug.Log("정령 가공에서 일하고 있는 정령의 이름은 : " + chosen_Npc);
+                finishBuild();
+                run_Build();
+
                 break;
             case BuildingStat.Run:
                 Debug.Log("Run 상태 실행됨");
                 Debug.Log("현재 가공에서 일하고 있는 정령의 이름은 : " + chosen_Npc);           
-               if(chosen_Npc != null)
-                   buildingstat = BuildingStat.RunwithNpc;
+                finishBuild(); // 생산 종료
+                if(chosen_Npc != null)
+                   buildingstat = BuildingStat.RunwithNpc;  
                else
-                   Running_build();
+                   run_Build();
  
                 break;
             case BuildingStat.Stopwork:
                 Debug.Log("StopWork가 실행됨");
-                stoped_build();
+                
                 break;
         }
     }
 
-    void Running_build()
+    void run_Build()
     {
         //슬라이더 항상.
         //totalPdBar.fillAmount = (float)totalproductivity / (float)max_productivitydefault;
@@ -101,7 +100,7 @@ public class BuildingState : MonoBehaviour
         // 총 생산량을 초과했을때 상태전환.
         if (totalproductivity >= max_productivitydefault)
         {
-            totalproductivity = 0;
+            
             
             buildingstat = BuildingStat.Stopwork; // 그만 일하세욧!
 
@@ -121,23 +120,22 @@ public class BuildingState : MonoBehaviour
                 totalproductivity = max_productivitydefault;
                 Debug.Log($"전체 보유랑을 {max_productivitydefault}를 초과하여 {totalproductivity}만큼 저장되었습니다");
 
-                resourceManager.first_Source[resourceID] += max_productivitydefault;
-
             }
             making_cooltime = reset_cooltime; // 쿨타임 초기화
         }
         making_cooltime -= Time.deltaTime;
     }
 
-    // 공장 생산량 초과로 npc가 대기중인 상태.
-    void stoped_build()
-    {   
-        // npc 자체가 대기중인 상태
+    // 공장 생산량 초과로 npc 대기중.
+    void finishBuild()
+    {
+        if (totalproductivity >= max_productivitydefault)
+        {
+            buildingstat = BuildingStat.Stopwork; // 그만 일하세욧!
 
-        // npc를 추가하거나 
-    }
+        }
 
-    // select UI에서 호출.
+    }  // select UI에서 호출.
     public void get_buildNpcInfo(GameObject _npcObject)
     {
         GameObject oldNpc = chosen_Npc; // 이전 NPC 저장
