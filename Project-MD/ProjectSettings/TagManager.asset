@@ -6,6 +6,10 @@ TagManager:
   tags:
   - AudioManager
   - Building
+  - WayPoints
+  - GameManager
+  - Npc_info
+  - Npc
   layers:
   - Default
   - TransparentFX
