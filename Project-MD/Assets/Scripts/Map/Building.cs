@@ -34,8 +34,7 @@ public class Building : MonoBehaviour
     {                
         if (GameManager.instance.builderManager.get_BuilderMode() == 0)
         {
-            GameManager.instance.builderManager.set_BuildingInfo(ID, state, pollution);
-            
+            GameManager.instance.builderManager.set_BuildingInfo(ID, state, pollution);            
             return;
         }        
         else if (GameManager.instance.builderManager.get_BuilderMode() == 1)
@@ -46,8 +45,7 @@ public class Building : MonoBehaviour
     }
 
     private void OnMouseDrag()
-    {
-     
+    {     
         // 수정 모드인지 확인.
         if (GameManager.instance.builderManager.get_BuilderMode() < 2)
             return;

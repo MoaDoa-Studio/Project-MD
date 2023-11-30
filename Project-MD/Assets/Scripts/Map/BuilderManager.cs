@@ -58,7 +58,7 @@ public class BuilderManager : MonoBehaviour
         // 하위 UI 할당.
         Center_UI = Builder_UI.transform.Find("Center_UI").gameObject;
         Right_UI = Builder_UI.transform.Find("Right_UI").gameObject;
-        Inquire = BuildingInfo_UI.transform.Find("Inquire").gameObject;
+        //Inquire = BuildingInfo_UI.transform.Find("Inquire").gameObject;
         Relocate = Right_UI.transform.Find("Relocate").GetComponent<Button>();
         Fix = Right_UI.transform.Find("Fix").GetComponent<Button>();
         Cancel = Right_UI.transform.Find("Cancel").GetComponent<Button>();
