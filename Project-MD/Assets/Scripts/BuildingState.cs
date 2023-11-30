@@ -11,18 +11,18 @@ public class BuildingState : MonoBehaviour
     [SerializeField]
     private float reset_cooltime = 5f;
     [SerializeField]
-    private GameObject Building_Info; // 건물 상태창 UI Info.
     public GameObject chosen_Npc = null;   // 공장에서 일하는 npc
     public BuildingDatabaseSO buildingDatabase; // 빌딩 DB
+    public bool built = false;
     private int ID;
-    private bool state = false;
-    private string product;
     private int productivity;
-    private int bonus_productivity;
+    private int bonus_productivity; // npc 추가 효과
     public int totalproductivity;
     private int max_productivitydefault; // 임시 최대 생산량.
+    private string product;
     private Building building;
     private Building_Info_UI buildInfo;
+    private GameObject Building_Info; // 건물 상태창 UI Info.
     private GameObject gameManager;
     private ResourceManager resourceManager;
     private BuilderManager builderManager;
@@ -70,7 +70,7 @@ public class BuildingState : MonoBehaviour
         {
             case BuildingStat.RunwithNpc:
                 Debug.Log("Run && Npc 상태");
-                Debug.Log("정령 가공에서 일하고 있는 정령의 이름은 : " + chosen_Npc);
+                // 총 생산량 초과
                 finishBuild();
                 run_Build();
 
@@ -97,15 +97,6 @@ public class BuildingState : MonoBehaviour
         //슬라이더 항상.
         //totalPdBar.fillAmount = (float)totalproductivity / (float)max_productivitydefault;
         
-        // 총 생산량을 초과했을때 상태전환.
-        if (totalproductivity >= max_productivitydefault)
-        {
-            
-            
-            buildingstat = BuildingStat.Stopwork; // 그만 일하세욧!
-
-        }
-
         // 생산량 쿨타임 적용.
         if(making_cooltime <= 0)
         {

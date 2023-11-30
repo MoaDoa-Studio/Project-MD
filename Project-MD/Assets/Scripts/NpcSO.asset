@@ -17,7 +17,7 @@ MonoBehaviour:
     <ID>k__BackingField: 0
     <hungry>k__BackingField: 0
     <exp>k__BackingField: 0
-    <state>k__BackingField: "\uB3CC\uC544\uB2E4\uB2C8\uAE30"
+    <state>k__BackingField: Play
     <level>k__BackingField: 1
     <Affinity>k__BackingField: 5
     <Affinity_w>k__BackingField: 5
@@ -28,7 +28,7 @@ MonoBehaviour:
     <ID>k__BackingField: 1
     <hungry>k__BackingField: 0
     <exp>k__BackingField: 0
-    <state>k__BackingField: "\uB180\uC74C"
+    <state>k__BackingField: Play
     <level>k__BackingField: 2
     <Affinity>k__BackingField: 10
     <Affinity_w>k__BackingField: 3
@@ -39,7 +39,7 @@ MonoBehaviour:
     <ID>k__BackingField: 2
     <hungry>k__BackingField: 0
     <exp>k__BackingField: 0
-    <state>k__BackingField: "\uB180\uC74C"
+    <state>k__BackingField: Play
     <level>k__BackingField: 2
     <Affinity>k__BackingField: 15
     <Affinity_w>k__BackingField: 0
