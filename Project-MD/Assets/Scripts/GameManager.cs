@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public InputManager inputManager;
     public ResourceManager resourceManager;
     public Building_Info_UI buildingInfo;
+
     private void Awake()
     {
         if (instance == null)

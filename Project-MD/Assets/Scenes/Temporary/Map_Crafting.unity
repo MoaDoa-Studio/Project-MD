@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4487322, g: 0.49755985, b: 0.56967556, a: 1}
+  m_IndirectSpecularColor: {r: 0.45140082, g: 0.5008932, b: 0.5723175, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2576,7 +2576,7 @@ MonoBehaviour:
   builderManager: {fileID: 363313401}
   inputManager: {fileID: 363313402}
   resourceManager: {fileID: 363313403}
-  buildingInfo: {fileID: 0}
+  buildingInfo: {fileID: 363313405}
 --- !u!114 &363313401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2606,7 +2606,7 @@ MonoBehaviour:
   - {fileID: 833298978}
   - {fileID: 9104331}
   - {fileID: 2140786979}
-  - {fileID: 0}
+  - {fileID: 521207859}
   interacting_Build: {fileID: 0}
   cur_Mode: {fileID: 621461728}
 --- !u!114 &363313402
