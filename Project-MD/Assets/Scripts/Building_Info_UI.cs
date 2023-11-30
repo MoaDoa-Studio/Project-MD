@@ -14,7 +14,8 @@ public class Building_Info_UI : MonoBehaviour
     int productivity;
     int max_productivity;
     Vector3Int size;
-    GameObject prefab;
+    GameObject prefab; // 건물 프리팹.
+    GameObject original; // 상호작용 건물.
 
     [HideInInspector]
     public GameObject select_UI;
@@ -30,7 +31,7 @@ public class Building_Info_UI : MonoBehaviour
     {
         buildState = this.GetComponent<BuildingState>();  
     }
-    public void get_Values(string _name,int _level, int _ID, int _type, string _product, int _productivity, int _max_productivity, Vector3Int _size, GameObject _prefab)
+    public void get_Values(string _name,int _level, int _ID, int _type, string _product, int _productivity, int _max_productivity, Vector3Int _size, GameObject _prefab, GameObject _original)
     {
         naming = _name;
         level = _level;
@@ -41,7 +42,8 @@ public class Building_Info_UI : MonoBehaviour
         max_productivity = _max_productivity;
         size = _size;
         prefab = _prefab;
-    
+        original = _original;
+
         build_info.gameObject.SetActive(true);
 
         // UI 하단 세팅
@@ -60,7 +62,7 @@ public class Building_Info_UI : MonoBehaviour
     {
         select_UI.SetActive(true);
         // 어떤 빌딩 stat인지 전달해줘야함
-        this.GetComponent<Npc_Select_UI>().select_Buildsync(prefab);
+        this.GetComponent<Npc_Select_UI>().select_Buildsync(original);  //=> 말그대로 prefab만 전달해서 문제가 생김
         Debug.Log($"selectUI로 {prefab}이 추가됨");
        
     }

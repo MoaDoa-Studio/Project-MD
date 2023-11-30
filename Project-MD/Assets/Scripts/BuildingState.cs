@@ -6,16 +6,13 @@ using UnityEngine.UI;
 
 public class BuildingState : MonoBehaviour
 {
-    
-
     [SerializeField]
     private float making_cooltime = 5f;
     [SerializeField]
     private float reset_cooltime = 5f;
     [SerializeField]
     private GameObject Building_Info; // 건물 상태창 UI Info.
-    [SerializeField]
-    private GameObject chosen_Npc = null;   // 공장에서 일하는 npc
+    public GameObject chosen_Npc = null;   // 공장에서 일하는 npc
     public BuildingDatabaseSO buildingDatabase; // 빌딩 DB
     private int ID;
     private bool state = false;
@@ -30,7 +27,8 @@ public class BuildingState : MonoBehaviour
     private ResourceManager resourceManager;
     private BuilderManager builderManager;
     private Npc_Select_UI npcSelect;
-
+    public delegate void OnNpcChangedHandler(GameObject newNpc, GameObject oldNpc);
+    public event OnNpcChangedHandler onNpcChanged; // delegate 정의
     // Builder 하위 UI들.
     private Image totalPdBar;
     public GameObject state_icon; // 공장 가동, 생산완료 아이콘.
@@ -38,7 +36,7 @@ public class BuildingState : MonoBehaviour
     
     public enum BuildingStat
     {
-        Idle,
+        RunwithNpc,
         Run,
         Stopwork
     }
@@ -58,6 +56,7 @@ public class BuildingState : MonoBehaviour
         product = buildingDatabase.buildingsData[ID].product; // 생산하는 원소자원
         productivity = buildingDatabase.buildingsData[ID].productivity; // 건물 생산 속도
         max_productivitydefault = buildingDatabase.buildingsData[ID].max_productivity; // 최대 생산량
+
     }
 
     // Update is called once per frame
@@ -66,21 +65,26 @@ public class BuildingState : MonoBehaviour
        // Swicth문 벗어남.
 
        
-        UpdateState();
+       // UpdateState();
     }
 
     public void UpdateState()
     {
         switch(buildingstat)
         {
-            case BuildingStat.Idle:
-                Debug.Log("Idle 상태가 실행되기는 함");
+            case BuildingStat.RunwithNpc:
+                Debug.Log("Run && Npc 상태");
+                Debug.Log("정령 가공에서 일하고 있는 정령의 이름은 : " + chosen_Npc);           
+                
                 break;
             case BuildingStat.Run:
                 Debug.Log("Run 상태 실행됨");
-                
-                Running_build();
-                
+                Debug.Log("현재 가공에서 일하고 있는 정령의 이름은 : " + chosen_Npc);           
+               if(chosen_Npc != null)
+                   buildingstat = BuildingStat.RunwithNpc;
+               else
+                   Running_build();
+ 
                 break;
             case BuildingStat.Stopwork:
                 Debug.Log("StopWork가 실행됨");
@@ -133,11 +137,27 @@ public class BuildingState : MonoBehaviour
         // npc를 추가하거나 
     }
 
-    // select UI에서 호출
+    // select UI에서 호출.
     public void get_buildNpcInfo(GameObject _npcObject)
     {
-        chosen_Npc = _npcObject;
+        GameObject oldNpc = chosen_Npc; // 이전 NPC 저장
+        chosen_Npc = _npcObject;    // 새로운 NPC로 업데이트
         Debug.Log("Chosen_npc는 : " +  chosen_Npc);
+
+        // 이벤트 호출 (Npc 변경시)
+
+        if (onNpcChanged != null)
+        {
+            onNpcChanged.Invoke(chosen_Npc, oldNpc);
+            
+        }
+        else
+            onNpcChanged = OnNpcUpdated;
+    }
+
+    private void OnNpcUpdated(GameObject newNpc, GameObject oldNpc)
+    {
+
     }
 
     private int getResourceID(string str)
@@ -165,6 +185,6 @@ public class BuildingState : MonoBehaviour
         buildingDatabase.buildingsData[ID].ID, buildingDatabase.buildingsData[ID].type,
         buildingDatabase.buildingsData[ID].product, buildingDatabase.buildingsData[ID].
         productivity, buildingDatabase.buildingsData[ID].max_productivity,
-        buildingDatabase.buildingsData[ID].size, buildingDatabase.buildingsData[ID].prefab);
+        buildingDatabase.buildingsData[ID].size, buildingDatabase.buildingsData[ID].prefab, this.gameObject);
     }
 }

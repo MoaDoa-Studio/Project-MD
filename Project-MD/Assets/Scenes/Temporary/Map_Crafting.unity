@@ -11109,6 +11109,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 180524340080671017, guid: 563f42f12ab3d9242b47fa92656ebfa3, type: 3}
+      propertyPath: chosen_Npc
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 180524340080671017, guid: 563f42f12ab3d9242b47fa92656ebfa3, type: 3}
       propertyPath: state_icon
       value: 
       objectReference: {fileID: 301340077}
@@ -13536,18 +13540,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2564957944160072264, guid: 1d8e5b823bd5c124da09559b38965f01, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.92387956
-      objectReference: {fileID: 0}
-    - target: {fileID: 2564957944160072264, guid: 1d8e5b823bd5c124da09559b38965f01, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.38268343
-      objectReference: {fileID: 0}
-    - target: {fileID: 2564957944160072264, guid: 1d8e5b823bd5c124da09559b38965f01, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -45
-      objectReference: {fileID: 0}
     - target: {fileID: 6035893492886158654, guid: 1d8e5b823bd5c124da09559b38965f01, type: 3}
       propertyPath: m_Name
       value: Water_npc

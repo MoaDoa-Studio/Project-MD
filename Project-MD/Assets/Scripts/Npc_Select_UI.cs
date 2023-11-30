@@ -15,7 +15,9 @@ public class Npc_Select_UI : MonoBehaviour
     private Button[] npcButtons; // buttonArr 생성된 버튼배열 체크
     public GameObject Content;
     public GameObject buttonprefab;
+    [SerializeField]
     private GameObject selectedNpc; // 일하는 정령
+    [SerializeField]
     private GameObject buildprefab; // 선택된 건물
 
    
