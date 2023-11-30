@@ -148,6 +148,7 @@ public class BuilderManager : MonoBehaviour
         //
 
         change_BuilderMode("Default");
+        mouseIndicator.GetComponent<Building>().isFixed = true;
         StopMove();
     }
     public void click_CancelButton()
@@ -176,6 +177,21 @@ public class BuilderManager : MonoBehaviour
             change_BuilderMode("Default");
         StopMove();
     }    
+    public void click_BuilderExit()
+    {        
+        // Fix -> Default. Modify에서는 변경 X.
+        if (builderMode == BuilderMode.Fix)
+        {
+            // 배치를 캔슬할 때 사용하는 함수.
+            if (mouseIndicator != null)
+                Destroy(mouseIndicator);            
+        }
+        
+        mouseIndicator = null;
+        cellIndicator.SetActive(false);
+        change_BuilderMode("No");
+        StopMove();
+    }
     public void StartPlacement(int ID)
     {
         // 수정 모드일 때는 설치 불가.
@@ -198,10 +214,7 @@ public class BuilderManager : MonoBehaviour
         // 불러온 데이터 건물 생성.
         if (mouseIndicator != null)
             Destroy(mouseIndicator);
-        mouseIndicator = Instantiate(database.buildingsData[selectedObjectIndex].prefab, grid.CellToWorld(gridPos), Quaternion.identity, instance_Parent.transform);
-
-        // 건물 생성 후 buildstate = true;
-        //database.buildingsData[selectedObjectIndex].prefab.GetComponent<BuildingState>().built = true;
+        mouseIndicator = Instantiate(database.buildingsData[selectedObjectIndex].prefab, grid.CellToWorld(gridPos), Quaternion.identity, instance_Parent.transform);        
        
         // 셀 인디케이터 액티브 및 사이즈 할당.        
         cellIndicator.transform.localPosition = grid.CellToWorld(gridPos);
@@ -209,6 +222,7 @@ public class BuilderManager : MonoBehaviour
         Vector3 child_Pos = mouseIndicator.transform.GetChild(0).transform.localPosition;
         set_CellIndicator(prefab_size, child_Pos);
         cellIndicator.SetActive(true);
+
         // 설치 모드로 변경.
         GameManager.instance.builderManager.change_BuilderMode("Fix");
 
@@ -309,9 +323,8 @@ public class BuilderManager : MonoBehaviour
             Debug.LogError($"No ID found {ID}");
             return;
         }
-
-        BuildingInfo_UI.SetActive(true);
-        BuildingInfo[0].text = "Name : " + database  .buildingsData[selectedObjectIndex].name;
+        
+        BuildingInfo[0].text = "Name : " + database.buildingsData[selectedObjectIndex].name;
         BuildingInfo[1].text = "State : " + state;
         BuildingInfo[2].text = "Product : " + database.buildingsData[selectedObjectIndex].product;
         BuildingInfo[3].text = "Productivity : " + database.buildingsData[selectedObjectIndex].productivity;        
@@ -320,6 +333,6 @@ public class BuilderManager : MonoBehaviour
         // 슬라이더 값으로 조절할거니깐 나중에.
         //BuildingInfo[5].text = "Hungry : ";
         BuildingInfo[5].text = "Max_Product : "; // 최대생산량
+        BuildingInfo_UI.SetActive(true);
     }
-
 }

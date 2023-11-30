@@ -41,8 +41,7 @@ public class Building_Info_UI : MonoBehaviour
     {   // 건물 레별별 동기화 x
         if (set == true)
         {
-            buildInfo[6].GetComponentInChildren<Slider>().value = original.GetComponent<BuildingState>().totalproductivity / (float)max_productivity;
-            
+            buildInfo[6].GetComponentInChildren<Slider>().value = original.GetComponent<BuildingState>().totalproductivity / (float)max_productivity;            
         }
         if (buildInfo[6].GetComponentInChildren<Slider>().value == 1)
             done.SetActive(true);      
@@ -63,7 +62,7 @@ public class Building_Info_UI : MonoBehaviour
         prefab = _prefab;
         original = _original;
 
-        build_info.gameObject.SetActive(true);
+        //build_info.gameObject.SetActive(true);
 
         // UI 하단 세팅
         buildInfo[0].text = "Name : " + _name;

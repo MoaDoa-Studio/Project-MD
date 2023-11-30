@@ -11,6 +11,7 @@ public class Building : MonoBehaviour
     public bool state; // 상태.
     public int pollution; // 오염도.
     public bool isCollide = false; // 충돌 체크
+    public bool isFixed = false;
 
     #region 충돌 체크
     private void OnCollisionEnter(Collision collision)
@@ -31,28 +32,41 @@ public class Building : MonoBehaviour
     #endregion
 
     private void OnMouseDown()
-    {                
-        if (GameManager.instance.builderManager.get_BuilderMode() == 0)
-        {
-            GameManager.instance.builderManager.set_BuildingInfo(ID, state, pollution);            
-            return;
-        }        
-        else if (GameManager.instance.builderManager.get_BuilderMode() == 1)
-            return;
+    {
+        Debug.Log(GameManager.instance.builderManager.get_BuilderMode());
 
-        // 건물 값 세팅.        
-        GameManager.instance.builderManager.StartMove(ID, this.gameObject);
+        if (GameManager.instance.builderManager.get_BuilderMode() == 0) // NO
+        {
+            GameManager.instance.builderManager.set_BuildingInfo(ID, state, pollution);
+            return;
+        }
+        else if (GameManager.instance.builderManager.get_BuilderMode() == 1) //Default
+            return;
+        else if (GameManager.instance.builderManager.get_BuilderMode() == 2) // Fix
+        {
+            // Fix 모드인 경우에만 건물 값 세팅.
+            if (isFixed == false)
+                GameManager.instance.builderManager.StartMove(ID, this.gameObject);
+        }
+        else // Relocate
+        {
+            // 건물 값 세팅.
+            GameManager.instance.builderManager.StartMove(ID, this.gameObject);
+        }
     }
 
     private void OnMouseDrag()
-    {     
-        // 수정 모드인지 확인.
-        if (GameManager.instance.builderManager.get_BuilderMode() < 2)
+    {        
+        if (GameManager.instance.builderManager.get_BuilderMode() < 2) // NO, Default
             return;
-
-        // 드래그
-        GameManager.instance.builderManager.moveItem();
-    }
-
         
+        // Fix 모드인 경우에는, 선택한 건물만 움직이도록.
+        if (GameManager.instance.builderManager.get_BuilderMode() == 2) // Fix
+        {
+            if (isFixed == false)
+                GameManager.instance.builderManager.moveItem();
+        }
+        else // Relocate
+            GameManager.instance.builderManager.moveItem();
+    }        
 }

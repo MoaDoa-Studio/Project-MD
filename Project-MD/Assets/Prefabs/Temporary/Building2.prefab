@@ -135,6 +135,7 @@ MonoBehaviour:
   state: 0
   pollution: 0
   isCollide: 0
+  isFixed: 0
 --- !u!65 &2888304905069042086
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -197,7 +198,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   making_cooltime: 5
   reset_cooltime: 5
-  Building_Info: {fileID: 0}
+  chosen_Npc: {fileID: 0}
   buildingDatabase: {fileID: 11400000, guid: e9e1161cb6f1b71428145ae99553eba0, type: 2}
+  built: 0
   totalproductivity: 0
   state_icon: {fileID: 0}
+  select_UI: {fileID: 0}
