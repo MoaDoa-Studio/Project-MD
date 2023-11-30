@@ -13,7 +13,7 @@ public class BuildingState : MonoBehaviour
     [SerializeField]
     public GameObject chosen_Npc = null;   // 공장에서 일하는 npc
     public BuildingDatabaseSO buildingDatabase; // 빌딩 DB
-    public bool built = false;
+    public bool built = false; // 건물 최초 건설값
     private int ID;
     private int productivity;
     private int bonus_productivity; // npc 추가 효과
@@ -175,5 +175,7 @@ public class BuildingState : MonoBehaviour
         buildingDatabase.buildingsData[ID].product, buildingDatabase.buildingsData[ID].
         productivity, buildingDatabase.buildingsData[ID].max_productivity,
         buildingDatabase.buildingsData[ID].size, buildingDatabase.buildingsData[ID].prefab, this.gameObject);
+    
+        
     }
 }
