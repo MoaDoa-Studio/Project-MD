@@ -310,7 +310,7 @@ public class BuilderManager : MonoBehaviour
     {
         // 오브젝트 아래 깔리는 셀 세팅 함수.
         Transform cellIndicator_child = cellIndicator.transform.GetChild(0).transform;
-        cellIndicator_child.localScale = new Vector3(size.x, 0.001f, size.z);
+        cellIndicator_child.localScale = new Vector3(size.x, 0.00001f, size.z);
         cellIndicator_child.localPosition = new Vector3(child_Pos.x, 0f, child_Pos.z);
     }
 

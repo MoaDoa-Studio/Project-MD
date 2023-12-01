@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 public class Demo_Building : MonoBehaviour
 {
     [SerializeField]
@@ -57,7 +58,9 @@ public class Demo_Building : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log(GameManager.instance.builderManager.get_BuilderMode());
+        // UI와 클릭하는 오브젝트가 겹치는 경우.
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
 
         if (GameManager.instance.builderManager.get_BuilderMode() == 0) // NO
         {
@@ -73,20 +76,22 @@ public class Demo_Building : MonoBehaviour
         else if (GameManager.instance.builderManager.get_BuilderMode() == 1) //Default
             return;
         else if (GameManager.instance.builderManager.get_BuilderMode() == 2) // Fix
-        {
-            // Fix 모드인 경우에만 건물 값 세팅.
+        {         
             if (isFixed == false)
                 GameManager.instance.builderManager.StartMove(ID, this.gameObject);
         }
         else // Relocate
-        {
-            // 건물 값 세팅.
+        {            
             GameManager.instance.builderManager.StartMove(ID, this.gameObject);
         }
     }
 
     private void OnMouseDrag()
     {
+        // UI와 클릭하는 오브젝트가 겹치는 경우.
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+
         if (GameManager.instance.builderManager.get_BuilderMode() < 2) // NO, Default
             return;
 
