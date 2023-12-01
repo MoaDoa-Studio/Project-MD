@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.45140082, g: 0.5008932, b: 0.5723175, a: 1}
+  m_IndirectSpecularColor: {r: 0.4487322, g: 0.49755985, b: 0.56967556, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -741,6 +741,14 @@ PrefabInstance:
     - target: {fileID: 7132598633139895801, guid: d4afa6fbb53ab7d4fb8d7ca0aaaf3685, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7950601124133860425, guid: d4afa6fbb53ab7d4fb8d7ca0aaaf3685, type: 3}
+      propertyPath: _lightAffectedRenderers.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7950601124133860425, guid: d4afa6fbb53ab7d4fb8d7ca0aaaf3685, type: 3}
+      propertyPath: _lightAffectedRenderers.Array.data[1]
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8673564552187294674, guid: d4afa6fbb53ab7d4fb8d7ca0aaaf3685, type: 3}
       propertyPath: m_Name
@@ -8948,7 +8956,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.92, y: 0.92}
+  m_Size: {x: 1.4, y: 0.86}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -12685,7 +12693,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.04, y: 1.07}
+  m_Size: {x: 1.42, y: 1.15}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -16156,6 +16164,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1412535216}
     m_Modifications:
+    - target: {fileID: -815644167791712885, guid: 746bc8c5b21be0d4b80c3e0360d42167, type: 3}
+      propertyPath: _lightAffectedRenderers.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: -815644167791712885, guid: 746bc8c5b21be0d4b80c3e0360d42167, type: 3}
+      propertyPath: _lightAffectedRenderers.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 110373321680545795, guid: 746bc8c5b21be0d4b80c3e0360d42167, type: 3}
       propertyPath: m_Name
       value: Bush 3 Green
