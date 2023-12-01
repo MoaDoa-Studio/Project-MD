@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class LineGrid : MonoBehaviour
 {
-    public int gridSize = 10;
-    public float cellSize = 1.0f;
+    public int gridSize;
+    private float cellSize = 1.0f;
     public Material gridMaterial; // 적절한 메테리얼을 할당하세요.
 
-    private Vector3 offset = new Vector3(5f, 0, 5f);
+    private Vector3 offset = new Vector3(5, 0, 5f);
     void Start()
     {
         DrawGrid();

@@ -175,7 +175,5 @@ public class BuildingState : MonoBehaviour
         buildingDatabase.buildingsData[ID].product, buildingDatabase.buildingsData[ID].
         productivity, buildingDatabase.buildingsData[ID].max_productivity,
         buildingDatabase.buildingsData[ID].size, buildingDatabase.buildingsData[ID].prefab, this.gameObject);
-    
-        
     }
 }
