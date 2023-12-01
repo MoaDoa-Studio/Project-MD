@@ -27,7 +27,9 @@ public class BuildingData
     [field: SerializeField]
     public int max_productivity { get; private set; } // 건물 최대 생산량.
     [field: SerializeField]
-    public Vector3Int size { get; private set; } = Vector3Int.one;
+    public Vector3Int size { get; private set; } = Vector3Int.one; // 건물 사이즈.
+    //[field: SerializeField]
+    //public Vector3Int center { get; private set; } = Vector3Int.zero; // 건물 중앙 좌표.
     [field: SerializeField]
     public GameObject prefab { get; private set; }
 }
