@@ -200,9 +200,8 @@ public class BuilderManager : MonoBehaviour
 
         // 건물을 처음 생성할 때 사용하는 함수.
         // 매개 변수 ID와 같은 값을 가지는 Data.ID가 있다면 불러오기.
-        selectedObjectIndex = database.buildingsData.FindIndex(data => data.ID == ID);
-        // 데이타가 없다면 중지.
-        if (selectedObjectIndex < 0)
+        selectedObjectIndex = database.buildingsData.FindIndex(data => data.ID == ID);        
+        if (selectedObjectIndex < 0) // 데이터가 없다면 중지.
         {
             Debug.LogError($"No ID found {ID}");
             return;
