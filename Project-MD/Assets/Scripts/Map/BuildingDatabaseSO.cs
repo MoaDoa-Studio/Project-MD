@@ -13,17 +13,15 @@ public class BuildingDatabaseSO : ScriptableObject
 public class BuildingData
 {
     [field: SerializeField]
-    public string name { get; private set; } // 이름
-    [field: SerializeField]
-    public int level { get; private set; } // 이름
+    public string name { get; private set; } // 이름    
     [field: SerializeField]
     public int ID { get; private set; } // 건물 ID
     [field: SerializeField]
-    public int type { get; private set; } // 건물 타입.
+    public string type { get; private set; } // 건물 타입.
     [field: SerializeField]
-    public string product { get; private set; } // 건물 생산품.
+    public int product { get; private set; } // 건물 생산품.
     [field: SerializeField]
-    public int productivity { get; private set; } // 건물 생산 속도.
+    public int production_Speed { get; private set; } // 건물 생산 속도.
     [field: SerializeField]
     public int max_productivity { get; private set; } // 건물 최대 생산량.
     [field: SerializeField]
@@ -32,4 +30,6 @@ public class BuildingData
     //public Vector3Int center { get; private set; } = Vector3Int.zero; // 건물 중앙 좌표.
     [field: SerializeField]
     public GameObject prefab { get; private set; }
+    [field: SerializeField]
+    public Sprite sprite { get; private set; }
 }

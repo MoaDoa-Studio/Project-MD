@@ -19,7 +19,7 @@ public class BuildingState : MonoBehaviour
     private int bonus_productivity; // npc 추가 효과
     public int totalproductivity;
     private int max_productivitydefault; // 임시 최대 생산량.
-    private string product;
+    private int product;
     private Building building;
     private Building_Info_UI buildInfo;
     private GameObject Building_Info; // 건물 상태창 UI Info.
@@ -52,7 +52,7 @@ public class BuildingState : MonoBehaviour
         builderManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<BuilderManager>();   
         ID = building.ID; // 프리팹의 ID값 DB로 빌딩스텟 관리 
         product = buildingDatabase.buildingsData[ID].product; // 생산하는 원소자원
-        productivity = buildingDatabase.buildingsData[ID].productivity; // 건물 생산 속도
+        productivity = buildingDatabase.buildingsData[ID].production_Speed; // 건물 생산 속도
         max_productivitydefault = buildingDatabase.buildingsData[ID].max_productivity; // 최대 생산량
 
     }
@@ -101,7 +101,7 @@ public class BuildingState : MonoBehaviour
         if(making_cooltime <= 0)
         {
             // 생산을 합시다!! 
-            int resourceID = getResourceID(product);
+            //int resourceID = getResourceID(product);
            
             totalproductivity += productivity;
             Debug.Log($"전체 :{max_productivitydefault} // 에서 현재 {totalproductivity}만큼 쌓여있습니다");
@@ -149,31 +149,14 @@ public class BuildingState : MonoBehaviour
 
     }
 
-    private int getResourceID(string str)
-    {
-        // 리소스에 임의로 배정된 ID 리턴 함수.
-        switch (str)
-        {
-            case "Fire":
-                return 0;
-            case "Water":
-                return 1;
-            case "Spark":
-                return 2;
-            case "Ground":
-                return 3;
-        }
-        return -1;
-    }
-
     // Build_Info UI 세팅
-    private void OnMouseDown()
-    {
-        Debug.Log("build UI가 눌렸습니다!");
-        buildInfo.get_Values(buildingDatabase.buildingsData[ID].name, buildingDatabase.buildingsData[ID].level,
-        buildingDatabase.buildingsData[ID].ID, buildingDatabase.buildingsData[ID].type,
-        buildingDatabase.buildingsData[ID].product, buildingDatabase.buildingsData[ID].
-        productivity, buildingDatabase.buildingsData[ID].max_productivity,
-        buildingDatabase.buildingsData[ID].size, buildingDatabase.buildingsData[ID].prefab, this.gameObject);
-    }
+    //private void OnMouseDown()
+    //{
+    //    Debug.Log("build UI가 눌렸습니다!");
+    //    buildInfo.get_Values(buildingDatabase.buildingsData[ID].name, buildingDatabase.buildingsData[ID].level,
+    //    buildingDatabase.buildingsData[ID].ID, buildingDatabase.buildingsData[ID].type,
+    //    buildingDatabase.buildingsData[ID].product, buildingDatabase.buildingsData[ID].
+    //    productivity, buildingDatabase.buildingsData[ID].max_productivity,
+    //    buildingDatabase.buildingsData[ID].size, buildingDatabase.buildingsData[ID].prefab, this.gameObject);
+    //}
 }

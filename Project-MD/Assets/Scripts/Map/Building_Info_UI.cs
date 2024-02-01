@@ -37,16 +37,6 @@ public class Building_Info_UI : MonoBehaviour
        
     }
 
-    private void Update()
-    {   // 건물 레별별 동기화 x
-        if (set == true)
-        {
-            buildInfo[6].GetComponentInChildren<Slider>().value = original.GetComponent<BuildingState>().totalproductivity / (float)max_productivity;            
-        }
-        if (buildInfo[6].GetComponentInChildren<Slider>().value == 1)
-            done.SetActive(true);      
-        
-    }
     public void get_Values(string _name,int _level, int _ID, int _type, string _product, int _productivity, int _max_productivity, Vector3Int _size, GameObject _prefab, GameObject _original)
     {
         this.GetComponent<Npc_Select_UI>().select_Buildsync(original);  //=> 말그대로 prefab만 전달해서 문제가 생김
@@ -82,7 +72,7 @@ public class Building_Info_UI : MonoBehaviour
         select_UI.SetActive(true);
     }
 
-    public void inquire()
+    public void Inquire()
     {
         int resourceID = getResourceID(product);
         resourceManager.first_Source[resourceID] += max_productivity;
