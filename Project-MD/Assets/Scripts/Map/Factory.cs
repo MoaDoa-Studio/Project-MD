@@ -5,11 +5,13 @@ using UnityEngine.EventSystems;
 
 public class Factory : Building
 {
+    public int level; // 레벨.
     public bool state; // 운용 상태.
     public int currentProduct; // 현재까지의 생산량.
 
     public void Start()
     {
+        level = 1;
         state = false;
         currentProduct = 0;
     }
@@ -22,7 +24,7 @@ public class Factory : Building
 
         if (GameManager.instance.builderManager.get_BuilderMode() == 0) // NO
         {
-            GameManager.instance.builderManager.set_BuildingInfo(ID, state, currentPollution);
+            GameManager.instance.builderManager.ViewBuildingInfo(ID, level, currentPollution);
             return;
         }
         else if (GameManager.instance.builderManager.get_BuilderMode() == 1) //Default

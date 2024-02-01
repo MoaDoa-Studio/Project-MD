@@ -5,6 +5,8 @@ using UnityEngine.EventSystems;
 
 public class WorldTree : Building
 {
+    [SerializeField]
+    private GameObject WorldTree_UI;
     protected override void OnMouseDown()
     {
         // UI와 클릭하는 오브젝트가 겹치는 경우.
@@ -13,14 +15,13 @@ public class WorldTree : Building
 
         if (GameManager.instance.builderManager.get_BuilderMode() == 0) // NO
         {
-            //GameManager.instance.builderManager.set_BuildingInfo(ID, state, currentPollution);           
-            // 세계수 전용 UI 띄워줌.
-            
-            //
+            WorldTree_UI.SetActive(true);
             return;
         }
         else if (GameManager.instance.builderManager.get_BuilderMode() == 1) //Default
+        {
             return;
+        }
         else if (GameManager.instance.builderManager.get_BuilderMode() == 2) // Fix
         {
             // Fix 모드인 경우에만 건물 값 세팅.
