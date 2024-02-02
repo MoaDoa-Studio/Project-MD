@@ -24,9 +24,9 @@ public class BuilderManager : MonoBehaviour
     [SerializeField]
     private GameObject BuildingInfo_UI; // 건물 상태창 UI.
     [SerializeField]
-    private TextMeshProUGUI[] BuildingInfo; // 건물 상태창 인포.
+    private TextMeshProUGUI[] BuildingInfo; // 건물 상태창 인포.    
     [SerializeField]
-    private GameObject interacting_Build; // 버튼 v -와 동기화시킬 건물
+    private Image BuildingInfo_Image; // 건물 상태창 건물 이미지.    
 
     private int selectedObjectIndex = -1; // 선택된 건물 인덱스.
     private GameObject mouseIndicator; // 현재 선택된 건물 저장.
@@ -47,31 +47,30 @@ public class BuilderManager : MonoBehaviour
         Default, // 기본 건축 모드.
         Fix, // 새로운 건물 설치 모드.
         Relocate, // 배치 수정 모드.
-    }
-
-
-    // 임시.
-    public TextMeshProUGUI cur_Mode;
+    }    
 
     private void Start()
     {
         // 하위 UI 할당.
         Center_UI = Builder_UI.transform.Find("Center_UI").gameObject;
-        Right_UI = Builder_UI.transform.Find("Right_UI").gameObject;
-        //Inquire = BuildingInfo_UI.transform.Find("Inquire").gameObject;
+        Right_UI = Builder_UI.transform.Find("Right_UI").gameObject;        
         Relocate = Right_UI.transform.Find("Relocate").GetComponent<Button>();
         Fix = Right_UI.transform.Find("Fix").GetComponent<Button>();
         Cancel = Right_UI.transform.Find("Cancel").GetComponent<Button>();
         Quit = Right_UI.transform.Find("Quit").GetComponent<Button>();
         resourceManager = this.GetComponent<ResourceManager>();
+
         // 초기화.
         StopMove();
         builderMode = BuilderMode.No;
     }
-            
-    public void change_BuilderMode(string mode)
+
+    private void Update()
     {
-        cur_Mode.text = mode;
+        change_CellColor();
+    }
+    public void change_BuilderMode(string mode)
+    {        
         // 현재 건축 모드를 변경하는 함수.
         switch(mode)
         {
@@ -200,9 +199,8 @@ public class BuilderManager : MonoBehaviour
 
         // 건물을 처음 생성할 때 사용하는 함수.
         // 매개 변수 ID와 같은 값을 가지는 Data.ID가 있다면 불러오기.
-        selectedObjectIndex = database.buildingsData.FindIndex(data => data.ID == ID);
-        // 데이타가 없다면 중지.
-        if (selectedObjectIndex < 0)
+        selectedObjectIndex = database.buildingsData.FindIndex(data => data.ID == ID);        
+        if (selectedObjectIndex < 0) // 데이터가 없다면 중지.
         {
             Debug.LogError($"No ID found {ID}");
             return;
@@ -314,7 +312,7 @@ public class BuilderManager : MonoBehaviour
         cellIndicator_child.localPosition = new Vector3(child_Pos.x, 0f, child_Pos.z);
     }
 
-    public void set_BuildingInfo(int ID, bool state, int pollution)
+    public void ViewBuildingInfo(int ID, int level, int pollution)
     {
         selectedObjectIndex = database.buildingsData.FindIndex(data => data.ID == ID);
         // 데이타가 없다면 중지.
@@ -324,15 +322,13 @@ public class BuilderManager : MonoBehaviour
             return;
         }
         
-        BuildingInfo[0].text = "Name : " + database.buildingsData[selectedObjectIndex].name;
-        BuildingInfo[1].text = "State : " + state;
-        BuildingInfo[2].text = "Product : " + database.buildingsData[selectedObjectIndex].product;
-        BuildingInfo[3].text = "Productivity : " + database.buildingsData[selectedObjectIndex].productivity;        
-        BuildingInfo[4].text = "Pollution : " + pollution;
-
-        // 슬라이더 값으로 조절할거니깐 나중에.
-        //BuildingInfo[5].text = "Hungry : ";
-        BuildingInfo[5].text = "Max_Product : "; // 최대생산량
+        BuildingInfo[0].text = database.buildingsData[selectedObjectIndex].name; // 이름
+        BuildingInfo[1].text = level.ToString(); // 레벨.
+        BuildingInfo[2].text = database.buildingsData[selectedObjectIndex].type; // 타입.
+        BuildingInfo[3].text = database.buildingsData[selectedObjectIndex].product.ToString();
+        BuildingInfo[4].text = database.buildingsData[selectedObjectIndex].production_Speed.ToString();        
+        BuildingInfo[5].text = pollution.ToString();
+        BuildingInfo_Image.sprite = database.buildingsData[selectedObjectIndex].sprite;
         BuildingInfo_UI.SetActive(true);
     }
 }
