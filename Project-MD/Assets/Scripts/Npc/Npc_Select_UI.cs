@@ -19,8 +19,8 @@ public class Npc_Select_UI : MonoBehaviour
     private GameObject selectedNpc; // 일하는 정령
     [SerializeField]
     private GameObject buildprefab; // 선택된 건물
-
-   
+    
+   /*
     void Update()
     {   // Npc 태그로 찾은 오브젝트 배열로 받음.
         GameObject[] npcObjects = GameObject.FindGameObjectsWithTag("Npc");
@@ -35,6 +35,7 @@ public class Npc_Select_UI : MonoBehaviour
                 npc_ObjectList.Add(npcObj);
                 Debug.Log("npc_ObjectList 추가된 정령 이름 : " +  npcObj.GetComponent<NpcStat>().names);
                 // 해당 갯수에 맞춰서 Button을 생성.
+                if (Content != null)
                 if (Content != null)
                 {   // 부모의 자식 오브젝트로 생성.
                     GameObject button = Instantiate(buttonprefab, Content.transform);
@@ -54,7 +55,7 @@ public class Npc_Select_UI : MonoBehaviour
 
         // 눌린 버튼의 i값을 가져오면서 해당 npc 정보값을 가져옴 => 건물 생산량 업데이트 / 필드에서 해당 오브젝트 사라지게하기
     }
-
+   */
     // UI 버튼 클릭 되어졌을 때.
     void OnButtonClick(int buttonIndex)
     {

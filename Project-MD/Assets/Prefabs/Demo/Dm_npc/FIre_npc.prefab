@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 8889935661446905754}
   m_Layer: 0
   m_Name: FIre_npc
-  m_TagString: Untagged
+  m_TagString: Npc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84,6 +84,7 @@ MonoBehaviour:
   ID: 2
   move_speed: 0.2
   childPrefab: {fileID: 3987917741019062031, guid: 8e4897db019bfde4fb4914c7a04fc3cc, type: 3}
+  factoryWork: 0
 --- !u!65 &468506644673578430
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -118,6 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npc_database: {fileID: 11400000, guid: c740054cbeeacfd4cbd42960ebf41a7b, type: 2}
+  names: 
 --- !u!1 &3451461484270013407
 GameObject:
   m_ObjectHideFlags: 0

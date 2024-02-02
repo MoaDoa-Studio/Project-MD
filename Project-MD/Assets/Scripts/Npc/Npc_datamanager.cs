@@ -72,33 +72,45 @@ public class Npc_datamanager : MonoBehaviour
         npc_List.Remove(_removeNpc);
     }
 
-    // 정령 데이터 값을 불러오는 함수 //총 정령 갯수와 그 정령들의 id값을 반환함
-    public void get_totalNpcValues()
+    // 정령 데이터 값을 불러오는 함수 //총 정령 갯수와 그 정령들의 List값을 반환함
+    public List<GameObject> get_totalNpcValues()
     {
         GameObjectInfoResult result = DisplayGameObjectInfo(npc_List);
 
-        Debug.Log(result.objectCount); // 게임 오브젝트 총 갯수.
-        
+        Debug.Log(npc_List.Count); // 게임 오브젝트 총 갯수.
+
+        return npc_List;
         // 현재 필드에 존재하는 오브젝트의 id 값을 List로 받아들임
         // 정령의 id값으로 NPCDatabasaeSO 데이터를 불러들일 수 있음
-        foreach(int info in result.objectInfoList)
-        {
-            Debug.Log(info);
-        }
+       
 
 
 
     }
 
-    GameObjectInfoResult DisplayGameObjectInfo(List<GameObject> _gameObjectList)
+    public GameObjectInfoResult DisplayGameObjectInfo(List<GameObject> _gameObjectList)
     {
+        // Npc 태그로 찾은 오브젝트 배열로 받음.
+        GameObject[] npcObjects = GameObject.FindGameObjectsWithTag("Npc");
+
+        // npcObjects 배열의 각 요소를 npc_ObjectList에 추가.
+        for (int i = 0; i < npcObjects.Length; i++)
+        {
+            GameObject npcObj = npcObjects[i];
+
+            // 새로운 오브젝트 있을때마다 리스트에 추가.
+            if (!npc_List.Contains(npcObj))
+            {
+                npc_List.Add(npcObj);
+            }
+        }
+
         int objectCount = npc_List.Count;
         List<int> objectInfoList = new List<int>();
 
         for(int i = 0; i< objectCount; i++) 
         {
             GameObject obj = npc_List[i];
-
         }
 
         return new GameObjectInfoResult
