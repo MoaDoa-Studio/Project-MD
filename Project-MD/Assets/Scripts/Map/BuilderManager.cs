@@ -125,7 +125,6 @@ public class BuilderManager : MonoBehaviour
         if (builderMode != BuilderMode.Default)
             return;
 
-
         // 배치를 캔슬할 때 사용하는 함수.
         if (mouseIndicator != null)
             Destroy(mouseIndicator);                    

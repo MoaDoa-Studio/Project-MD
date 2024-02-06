@@ -25,40 +25,23 @@ public class Factory : Building
         origin_Position = Vector3.zero;
     }
 
-    protected override void OnMouseDown()
+    protected override void OnMouseUp()
     {
         int currentBuilderMode = builderManager.get_BuilderMode();
 
         // UI와 클릭하는 오브젝트가 겹치는 경우.
         if (EventSystem.current.IsPointerOverGameObject())
             return;
-        
+
         if (currentBuilderMode == 0) // NO
         {
             builderManager.ViewBuildingInfo(ID, level, currentPollution);
             return;
         }
-        else if (currentBuilderMode == 1) //Default
-        {
-            // 이미 선택된 건물이 있다면 클릭 불가.
-            if (builderManager.mouseIndicator != null)
-                return;
 
-            builderManager.StartMove(ID, this.gameObject);
-            origin_Position = gameObject.transform.position;
-            builderManager.change_BuilderMode("Relocate");
+        // 이미 선택된 건물이 있다면 클릭 불가.
+        if (builderManager.mouseIndicator == this.gameObject)
             Builder_Menu.SetActive(true);
-            return;
-        }
-        else if (currentBuilderMode == 2) // Fix
-        {
-            if (builderManager.mouseIndicator != null)
-                return;
-
-            // Fix 모드인 경우에만 건물 값 세팅.
-            if (isFixed == false)
-                builderManager.StartMove(ID, this.gameObject);
-        }        
     }
 
     protected override void OnMouseDrag()
@@ -69,17 +52,27 @@ public class Factory : Building
         if (EventSystem.current.IsPointerOverGameObject())
             return;
 
-        if (currentBuilderMode < 2) // NO, Default
+        if (currentBuilderMode == 0) // NO
             return;
-
-        // Fix 모드인 경우에는, 선택한 건물만 움직이도록.
-        if (currentBuilderMode == 2) // Fix
+        else if (currentBuilderMode == 1) // Default
+        {
+            // 먼저 움직일 건물 매니저에 세팅 후 Relocate로 변경.
+            if (builderManager.mouseIndicator == null)
+            {
+                builderManager.StartMove(ID, this.gameObject);
+                origin_Position = gameObject.transform.position;
+                builderManager.change_BuilderMode("Relocate");
+            }
+        }        
+        else if (currentBuilderMode == 2) // Fix
         {
             if (isFixed == false)
                 builderManager.moveItem();
         }
         else // Relocate
+        {
             builderManager.moveItem();
+        }
     }
 
     public void Click_FixButton()
