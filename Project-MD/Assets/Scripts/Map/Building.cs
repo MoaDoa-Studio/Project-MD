@@ -36,7 +36,7 @@ public class Building : MonoBehaviour
     #endregion
 
     #region 마우스 입력 관련
-    protected virtual void OnMouseDown() { }
+    protected virtual void OnMouseUp() { }
     protected virtual void OnMouseDrag() { }
     #endregion
 }
