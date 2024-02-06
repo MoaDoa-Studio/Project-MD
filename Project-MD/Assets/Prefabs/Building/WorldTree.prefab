@@ -48,11 +48,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: 2
-  state: 0
   currentPollution: 0
-  currentProduct: 0
   isCollide: 0
   isFixed: 0
+  WorldTree_UI: {fileID: 0}
 --- !u!65 &3003307128193351563
 BoxCollider:
   m_ObjectHideFlags: 0
