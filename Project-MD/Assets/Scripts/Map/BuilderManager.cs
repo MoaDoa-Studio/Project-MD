@@ -29,7 +29,7 @@ public class BuilderManager : MonoBehaviour
     private Image BuildingInfo_Image; // 건물 상태창 건물 이미지.    
 
     private int selectedObjectIndex = -1; // 선택된 건물 인덱스.
-    private GameObject mouseIndicator; // 현재 선택된 건물 저장.
+    public GameObject mouseIndicator; // 현재 선택된 건물 저장.
 
     // Builder 하위 UI들.    
     private GameObject Center_UI;
@@ -37,8 +37,7 @@ public class BuilderManager : MonoBehaviour
     private Button Relocate;
     private Button Fix;
     private Button Cancel;
-    private Button Quit;
-    private GameObject Inquire;
+    private Button Quit;    
     
     BuilderMode builderMode;
     enum BuilderMode
@@ -80,45 +79,29 @@ public class BuilderManager : MonoBehaviour
                 break;
             case "Default":
                 builderMode = BuilderMode.Default;
-                GridLine.SetActive(false);
-                interactable_Fix(false);
-                interactable_Cancel(false);
-                interactable_Relocate(true);
-                interactable_Quit(true);
+                GridLine.SetActive(true);
+                Fix.interactable = false;
+                Cancel.interactable = false;
+                Relocate.interactable = true;
+                Quit.interactable = true;                
                 break;
             case "Fix":
                 builderMode = BuilderMode.Fix;
-                GridLine.SetActive(true);
-                interactable_Fix(true);
-                interactable_Cancel(true);
-                interactable_Relocate(false);
-                interactable_Quit(false);
+                GridLine.SetActive(true);                
+                Fix.interactable = true;
+                Cancel.interactable = true;
+                Relocate.interactable = false;
+                Quit.interactable = false;
                 break;
             case "Relocate":
                 builderMode = BuilderMode.Relocate;
-                GridLine.SetActive(true);
-                interactable_Fix(false);
-                interactable_Cancel(true);
-                interactable_Relocate(true);
-                interactable_Quit(true);
+                GridLine.SetActive(true);                
+                Fix.interactable = false;
+                Cancel.interactable = true;
+                Relocate.interactable = true;
+                Quit.interactable = true;
                 break;
         }
-    }
-    private void interactable_Fix(bool toggle)
-    {
-        Fix.interactable = toggle;
-    }
-    private void interactable_Cancel(bool toggle)
-    {
-        Cancel.interactable = toggle;
-    }
-    private void interactable_Relocate(bool toggle)
-    {
-        Relocate.interactable = toggle;
-    }
-    private void interactable_Quit(bool toggle)
-    {
-        Quit.interactable = toggle;
     }
     public int get_BuilderMode()
     {
@@ -136,56 +119,18 @@ public class BuilderManager : MonoBehaviour
                 Center_UI.transform.GetChild(i).gameObject.SetActive(false);
         }
     }
-    public void click_FixButton()
+    public void Click_BuilderExit()
     {
-        // 충돌 중인 건물이 있다면?
-        if (checkCollide() == true)
+        // Default 상태가 아니면 퇴장 불가.
+        if (builderMode != BuilderMode.Default)
             return;
 
-        // 재화 검사 및 UI 띄워야 하는 함수.
 
-        //
-
-        change_BuilderMode("Default");
-        mouseIndicator.GetComponent<Building>().isFixed = true;
-        StopMove();
-    }
-    public void click_CancelButton()
-    {
         // 배치를 캔슬할 때 사용하는 함수.
         if (mouseIndicator != null)
-            Destroy(mouseIndicator);
-
-        // 재화 돌려받는 함수.
-
-        //
-
-        // Fix -> Default. Modify에서는 변경 X.
-        if (builderMode == BuilderMode.Fix)
-            change_BuilderMode("Default");
-        StopMove();
-    }
-    public void click_QuitButton()
-    {
-        // 충돌 중인 건물이 있다면?
-        if (checkCollide() == true)                    
-            return;        
-
-        // Modify -> Default.
-        if (builderMode == BuilderMode.Relocate)
-            change_BuilderMode("Default");
-        StopMove();
-    }    
-    public void click_BuilderExit()
-    {        
-        // Fix -> Default. Modify에서는 변경 X.
-        if (builderMode == BuilderMode.Fix)
-        {
-            // 배치를 캔슬할 때 사용하는 함수.
-            if (mouseIndicator != null)
-                Destroy(mouseIndicator);            
-        }
+            Destroy(mouseIndicator);                    
         
+        // 초기화 후 건축모드 퇴장.
         mouseIndicator = null;
         cellIndicator.SetActive(false);
         change_BuilderMode("No");
