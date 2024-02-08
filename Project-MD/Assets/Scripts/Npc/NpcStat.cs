@@ -26,7 +26,7 @@ public class NpcStat : MonoBehaviour
         int npcID = GetComponent<NpcAI>().ID;
         names = npc_database.npcData[npcID].name;
         state = npc_database.npcData[npcID].state;
-        affinity = npc_database.npcData[npcID].Affinity;
+        //affinity = npc_database.npcData[npcID].Affinity;
         iD = npc_database.npcData[npcID].ID;
         level = npc_database.npcData[npcID].level;
         hungry = npc_database.npcData[npcID].hungry;
@@ -46,6 +46,6 @@ public class NpcStat : MonoBehaviour
         Debug.Log("npc UI가 눌렸습니다!");
         npcInfo.get_Values(npc_database.npcData[iD].name, npc_database.npcData[iD].ID,
         npc_database.npcData[iD].hungry, npc_database.npcData[iD].exp,
-        npc_database.npcData[iD].state, npc_database.npcData[iD].level, npc_database.npcData[iD].Affinity, npc_database.npcData[iD].prefab);
+        npc_database.npcData[iD].state, npc_database.npcData[iD].level, npc_database.npcData[iD].Affinity_w, npc_database.npcData[iD].prefab);
     }
 }
