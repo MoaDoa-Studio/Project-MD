@@ -8908,6 +8908,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1292409660}
+  - component: {fileID: 1292409661}
+  - component: {fileID: 1292409662}
   m_Layer: 0
   m_Name: Npc_Manager
   m_TagString: Untagged
@@ -8930,6 +8932,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1292409661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1292409659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b27a13e141dcabd4988a8572904ecf7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npc_List: []
+  selectedNpc: {fileID: 0}
+--- !u!114 &1292409662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1292409659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ded229f6d1c79ab45862b3aac27f4d68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npc_Xml: 
 --- !u!1 &1296112657 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3425374492766097400, guid: 0085033831fa1d6479ecd9c767799e74, type: 3}

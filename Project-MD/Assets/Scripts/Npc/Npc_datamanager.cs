@@ -88,6 +88,7 @@ public class Npc_datamanager : MonoBehaviour
 
     }
 
+    // Npc 초기화 버튼 눌릴시에 정령 유무 체크 함수.
     public GameObjectInfoResult DisplayGameObjectInfo(List<GameObject> _gameObjectList)
     {
         // Npc 태그로 찾은 오브젝트 배열로 받음.
