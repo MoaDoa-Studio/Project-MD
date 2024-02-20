@@ -8958,7 +8958,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ded229f6d1c79ab45862b3aac27f4d68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npc_Xml: 
+  npc_Xml: JindataTable
 --- !u!1 &1296112657 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3425374492766097400, guid: 0085033831fa1d6479ecd9c767799e74, type: 3}

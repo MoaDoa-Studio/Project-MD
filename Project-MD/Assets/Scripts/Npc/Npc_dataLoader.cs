@@ -9,7 +9,10 @@ public class Npc_dataLoader : MonoBehaviour
 {
     public string npc_Xml;
 
-
+    private void Start()
+    {
+        load_NpcDAta(npc_Xml);
+    }
     private void load_NpcDAta(string fileName)
     {
         TextAsset xmlAsset = Resources.Load<TextAsset>(fileName);
@@ -17,7 +20,7 @@ public class Npc_dataLoader : MonoBehaviour
         XmlDocument xmlDocument = new XmlDocument();
         xmlDocument.Load(xmlAsset.text);
 
-        XmlNodeList xmlNodeList = xmlDocument.SelectNodes("//Datas");
+        XmlNodeList xmlNodeList = xmlDocument.SelectNodes("//text");
 
         foreach (XmlNode xmlNode in xmlNodeList)
         {

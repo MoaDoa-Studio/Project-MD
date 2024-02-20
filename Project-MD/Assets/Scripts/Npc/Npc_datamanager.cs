@@ -11,6 +11,43 @@ public class GameObjectInfoResult
     public List<int> objectInfoList;
 }
 
+public class Npc_Data : ScriptableObject
+{
+  
+    [field: SerializeField]
+    public string name { get; private set; } //이름
+    [field: SerializeField]
+    public int Jin_id { get; private set; } // 고유 객체 번호
+    [field: SerializeField]
+    public float hunger { get; private set; } //만복도
+    [field: SerializeField]
+    public float exp { get; private set; } //경험치
+    [field: SerializeField]
+    public string state { get; private set; } //상태 (쉬는중, 일하는중..)
+    [field: SerializeField]
+    public int JinLev { get; private set; } //정령 레벨
+
+    [field: SerializeField]
+    public int ReqLev { get; private set; } //정령 필요경험치
+    [field: SerializeField]
+    public float F_affinity { get; private set; } // 특성 불 친화력
+    [field: SerializeField]
+    public float W_affinity { get; private set; } // 특성 물 친화력
+    [field: SerializeField]
+    public float E_affinity { get; private set; } // 특성 전기 친화력
+    [field: SerializeField]
+    public float G_affinity { get; private set; } // 특성 땅 친화력
+    [field: SerializeField]
+    public string D1 { get; private set; }
+    [field: SerializeField]
+    public string D2 { get; private set; }
+    [field: SerializeField]
+    public string Ef1 { get; private set; }
+    public string Ef2 { get; private set; }
+    public string Ef3 { get; private set; }
+    
+}
+
 public class Npc_datamanager : MonoBehaviour
 {
 

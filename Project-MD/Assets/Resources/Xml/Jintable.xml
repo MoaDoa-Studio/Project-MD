@@ -11,6 +11,9 @@
 		<D1>물 속성을 가진 정령이다.</D1>
 		<D2>물 공정 탑재시 생산량 +</D2>
 		<D3>머리 에센스와 다이X 고데기에 집착</D3>
+		<EF1>waterslime</EF1>
+		<EF2>waterchild</EF2>
+		<EF3>wateradult</EF3>
 	</text>
 	<text>
 		<name>Aquagirl</name>
@@ -23,6 +26,9 @@
 		<D1>물 속성을 가진 정령이다.</D1>
 		<D2>물 공정 탑재시 생산량 +</D2>
 		<D3>갓입학한 새내기 여대생. 오필완</D3>
+		<EF1>waterslime</EF1>
+		<EF2>waterchild</EF2>
+		<EF3>wateradult</EF3>
 	</text>
 	<text>
 		<name>Flamehip</name>
@@ -35,6 +41,9 @@
 		<D1>불 속성을 가진 정령이다.</D1>
 		<D2>불 공정 탑재시 생산량 +</D2>
 		<D3>화분과 레옹?</D3>
+		<EF1>flameslime</EF1>
+		<EF2>flamechild</EF2>
+		<EF3>flamemdala</EF3>
 	</text>
 	<text>
 		<name>Flamesalary</name>
@@ -47,6 +56,9 @@
 		<D1>불 속성을 가진 정령이다.</D1>
 		<D2>불 공정 탑재시 생산량 +</D2>
 		<D3>진급하고 싶어하는 만년 과장</D3>
+		<EF1>flameslime</EF1>
+		<EF2>flamechild</EF2>
+		<EF3>flamemdala</EF3>
 	</text>
 	<text>
 		<name>Elecman</name>
@@ -59,6 +71,9 @@
 		<D1>전기 속성을 가진 정령이다.</D1>
 		<D2>전기 공정 탑재시 생산량 +</D2>
 		<D3>3대 5000이 목표를 가진 잠꾸러기 헬창</D3>
+		<EF1>elecslime</EF1>
+		<EF2>elecschild</EF2>
+		<EF3>elecscdeie</EF3>
 	</text>
 	<text>
 		<name>Elecsnor</name>
@@ -71,6 +86,9 @@
 		<D1>전기 속성을 가진 정령이다.</D1>
 		<D2>전기 공정 탑재시 생산량 +</D2>
 		<D3>친구를 많이 사귀고 싶지만 자꾸 잠들어버림</D3>
+		<EF1>elecslime</EF1>
+		<EF2>elecschild</EF2>
+		<EF3>elecscdeie</EF3>
 	</text>
 	<text>
 		<name>Grocatus</name>
@@ -83,6 +101,9 @@
 		<D1>땅 속성을 가진 정령이다.</D1>
 		<D2>땅 공정 탑재시 생산량 +</D2>
 		<D3>꾸미는것을 좋아함</D3>
+		<EF1>gnomeslime</EF1>
+		<EF2>gnomechild</EF2>
+		<EF3>gnomecdolo</EF3>
 	</text>
 	<text>
 		<name>Groman</name>
@@ -95,5 +116,8 @@
 		<D1>땅 속성을 가진 정령이다.</D1>
 		<D2>땅 공정 탑재시 생산량 +</D2>
 		<D3>자연, 원시를 추구하며 혼자 있기를 좋아함</D3>
+		<EF1>gnomeslime</EF1>
+		<EF2>gnomechild</EF2>
+		<EF3>gnomemdolo</EF3>
 	</text>
 </Root>
