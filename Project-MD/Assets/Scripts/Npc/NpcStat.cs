@@ -24,25 +24,22 @@ public class NpcStat : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        npcInfo = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Npc_Info_UI>();
+        npcInfo = GameObject.FindGameObjectWithTag("NpcManager").GetComponent<Npc_Info_UI>();
         npcdata = npcManager.GetComponent<Npc_datamanager>();
         npcdata.Setaschild(this.gameObject);
-        // DB 초기화
-        int npcID = GetComponent<NpcAI>().ID;
-        names = npc_database.npcData[npcID].name;
-        state = npc_database.npcData[npcID].state;
-        //affinity = npc_database.npcData[npcID].Affinity;
-        iD = npc_database.npcData[npcID].ID;
-        level = npc_database.npcData[npcID].level;
-        hungry = npc_database.npcData[npcID].hungry;
-        exp = npc_database.npcData[npcID].exp;
-        prefab = npc_database.npcData[npcID].prefab;
+   
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    // 정령 데이터 호출 및 저장.
+    public void Get_Infovalue(int _number)
+    {
+       
     }
 
     // npc UI 동기화 정보값 넘김.
