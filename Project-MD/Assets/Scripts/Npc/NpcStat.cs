@@ -8,26 +8,39 @@ public class NpcStat : MonoBehaviour
     public NpcDatabaseSO npc_database;
     [HideInInspector]
     public string names;
+    [SerializeField]
+    private int jin_Id;
+    [SerializeField]
+    private float W_affinity;
+    [SerializeField]
+    private float F_affinity;
+    [SerializeField]
+    private float E_affinity;
+    [SerializeField]
+    private float G_affinity;
+    [SerializeField]
+    private int level = 1; // 정령 1레벨 초기화.
+    
     private string state;
-    private float affinity;
-    private int iD;
-    private int level;
-    private float hungry;
-    private float exp;
+    private float hunger;
+    private float levelingexp;
 
     private NpcAI npcAI;
     private GameObject prefab;
     private Npc_Info_UI npcInfo;
-    [SerializeField]
-    private GameObject npcManager;
     private Npc_datamanager npcdata;
+    private Npc_dataLoader npcLoader;
+
     // Start is called before the first frame update
     void Start()
     {
-        npcInfo = GameObject.FindGameObjectWithTag("NpcManager").GetComponent<Npc_Info_UI>();
-        npcdata = npcManager.GetComponent<Npc_datamanager>();
+        npcLoader = GameObject.FindGameObjectWithTag("NpcManager").GetComponent<Npc_dataLoader>();
+        npcdata = GameObject.FindGameObjectWithTag("NpcManager").GetComponent<Npc_datamanager>();
+       
         npcdata.Setaschild(this.gameObject);
-   
+
+        // 특성값을 만들어내는 함수.
+        attribute_Affinity();
     }
 
     // Update is called once per frame
@@ -36,18 +49,22 @@ public class NpcStat : MonoBehaviour
         
     }
 
-    // 정령 데이터 호출 및 저장.
+    // 정령 생성시 데이터 호출 및 저장.
     public void Get_Infovalue(int _number)
     {
-       
+        name = npcLoader.npcDatas[_number].Ef1; //진화 1폼이름으로 설정
+        jin_Id = npcLoader.npcDatas[_number].Jin_id;
+        hunger = npcLoader.levelDatas[level].hunger;
+        levelingexp = npcLoader.levelDatas[level].ReqLev;
     }
 
+    private void attribute_Affinity()
+    {
+
+    }
     // npc UI 동기화 정보값 넘김.
     private void OnMouseDown()
     {
-        Debug.Log("npc UI가 눌렸습니다!");
-        npcInfo.get_Values(npc_database.npcData[iD].name, npc_database.npcData[iD].ID,
-        npc_database.npcData[iD].hungry, npc_database.npcData[iD].exp,
-        npc_database.npcData[iD].state, npc_database.npcData[iD].level, npc_database.npcData[iD].Affinity_w, npc_database.npcData[iD].prefab);
+        
     }
 }
