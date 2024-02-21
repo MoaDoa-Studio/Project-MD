@@ -58,6 +58,7 @@ public class NpcStat : MonoBehaviour
         levelingexp = npcLoader.levelDatas[level].ReqLev;
     }
 
+    // 특성값 부여
     private void attribute_Affinity()
     {
 
