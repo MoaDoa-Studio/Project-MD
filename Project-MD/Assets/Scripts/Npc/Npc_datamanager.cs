@@ -15,39 +15,53 @@ public class Npc_Data : ScriptableObject
 {
   
     [field: SerializeField]
-    public string name { get; private set; } //이름
+    public string name { get; set; } //이름
     [field: SerializeField]
-    public int Jin_id { get; private set; } // 고유 객체 번호
+    public int Jin_id { get;  set; } // 고유 객체 번호
     [field: SerializeField]
-    public float hunger { get; private set; } //만복도
+    public string personality { get; set; } // 성격
     [field: SerializeField]
-    public float exp { get; private set; } //경험치
+    public float hunger { get; set; } //만복도
     [field: SerializeField]
-    public string state { get; private set; } //상태 (쉬는중, 일하는중..)
+    public float exp { get; set; } //경험치
     [field: SerializeField]
-    public int JinLev { get; private set; } //정령 레벨
+    public string state { get; set; } //상태 (쉬는중, 일하는중..)
+    [field: SerializeField]
+    public int JinLev { get; set; } //정령 레벨
 
     [field: SerializeField]
-    public int ReqLev { get; private set; } //정령 필요경험치
+    public int ReqLev { get; set; } //정령 필요경험치
     [field: SerializeField]
-    public float F_affinity { get; private set; } // 특성 불 친화력
+    public float F_affinity { get; set; } // 특성 불 친화력
     [field: SerializeField]
-    public float W_affinity { get; private set; } // 특성 물 친화력
+    public float W_affinity { get; set; } // 특성 물 친화력
     [field: SerializeField]
-    public float E_affinity { get; private set; } // 특성 전기 친화력
+    public float E_affinity { get; set; } // 특성 전기 친화력
     [field: SerializeField]
-    public float G_affinity { get; private set; } // 특성 땅 친화력
+    public float G_affinity { get; set; } // 특성 땅 친화력
     [field: SerializeField]
-    public string D1 { get; private set; }
+    public string D1 { get; set; }
     [field: SerializeField]
-    public string D2 { get; private set; }
+    public string D2 { get; set; }
     [field: SerializeField]
-    public string Ef1 { get; private set; }
-    public string Ef2 { get; private set; }
-    public string Ef3 { get; private set; }
+    public string D3 { get; set; }
+    [field: SerializeField]
+    public string Ef1 { get; set; }
+    public string Ef2 { get; set; }
+    public string Ef3 { get; set; }
     
 }
 
+public class Level_Data : ScriptableObject
+{
+    [field: SerializeField]
+    public int JinLev { get; set; } //이름
+    [field: SerializeField]
+    public int ReqLev { get; set; } //이름
+   
+    [field: SerializeField]
+    public float hunger { get; set; } //이름
+}
 public class Npc_datamanager : MonoBehaviour
 {
 
@@ -158,4 +172,9 @@ public class Npc_datamanager : MonoBehaviour
         };
     }
 
+    // 하위 오브젝트로 설정.
+    public void Setaschild(GameObject _gameObject)
+    {
+        _gameObject.transform.parent = this.transform;
+    }
 }

@@ -65,6 +65,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npc_database: {fileID: 11400000, guid: c740054cbeeacfd4cbd42960ebf41a7b, type: 2}
   names: 
+  npcManager: {fileID: 0}
 --- !u!65 &4956452929605741875
 BoxCollider:
   m_ObjectHideFlags: 0

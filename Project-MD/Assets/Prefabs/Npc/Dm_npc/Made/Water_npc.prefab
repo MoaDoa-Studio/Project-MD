@@ -459,6 +459,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npc_database: {fileID: 11400000, guid: c740054cbeeacfd4cbd42960ebf41a7b, type: 2}
   names: 
+  npcManager: {fileID: 0}
 --- !u!1 &6653183005486332366
 GameObject:
   m_ObjectHideFlags: 0

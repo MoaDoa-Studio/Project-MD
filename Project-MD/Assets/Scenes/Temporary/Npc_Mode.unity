@@ -7464,8 +7464,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1292409660}
-  - component: {fileID: 1292409661}
   - component: {fileID: 1292409662}
+  - component: {fileID: 1292409663}
+  - component: {fileID: 1292409664}
   m_Layer: 0
   m_Name: Npc_Manager
   m_TagString: Untagged
@@ -7488,7 +7489,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1292409661
+--- !u!114 &1292409662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1292409659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ded229f6d1c79ab45862b3aac27f4d68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npc_Xml: Jintable
+  levelTable_Xml: Balancemode
+  npcDatas: []
+  levelDatas: []
+--- !u!114 &1292409663
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7502,7 +7519,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npc_List: []
   selectedNpc: {fileID: 0}
---- !u!114 &1292409662
+--- !u!114 &1292409664
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7511,10 +7528,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1292409659}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ded229f6d1c79ab45862b3aac27f4d68, type: 3}
+  m_Script: {fileID: 11500000, guid: 4cee394cbd708e0499433d26aafe84c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npc_Xml: JindataTable
 --- !u!1 &1296112657 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3425374492766097400, guid: 0085033831fa1d6479ecd9c767799e74, type: 3}
@@ -8904,6 +8920,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1702919777}
   m_CullTransparentMesh: 1
+--- !u!1 &1717661458
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1717661459}
+  m_Layer: 0
+  m_Name: Hatcher
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1717661459
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1717661458}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.16, y: 0, z: 2.02}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1721713470
 GameObject:
   m_ObjectHideFlags: 0
@@ -11684,6 +11731,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2354423118333226171, guid: d72e0c7524f68bc4b826de4ecdf9999e, type: 3}
+      propertyPath: npcManager
+      value: 
+      objectReference: {fileID: 1292409659}
     - target: {fileID: 3830791084060593540, guid: d72e0c7524f68bc4b826de4ecdf9999e, type: 3}
       propertyPath: m_Name
       value: Fire_npc
@@ -12993,6 +13044,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 825863435291783599, guid: 1d8e5b823bd5c124da09559b38965f01, type: 3}
+      propertyPath: npcManager
+      value: 
+      objectReference: {fileID: 1292409659}
     - target: {fileID: 6035893492886158654, guid: 1d8e5b823bd5c124da09559b38965f01, type: 3}
       propertyPath: m_Name
       value: Water_npc
@@ -14211,6 +14266,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9077923398118564982, guid: c7cab7c4f3d2d4d40b4ec2981a4685d3, type: 3}
+      propertyPath: npcManager
+      value: 
+      objectReference: {fileID: 1292409659}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16205,3 +16264,4 @@ SceneRoots:
   - {fileID: 5247320666781163743}
   - {fileID: 1691815786363582078}
   - {fileID: 1292409660}
+  - {fileID: 1717661459}

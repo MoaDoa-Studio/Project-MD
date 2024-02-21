@@ -6,7 +6,6 @@ using UnityEngine;
 public class NpcStat : MonoBehaviour
 {
     public NpcDatabaseSO npc_database;
-    private NpcAI npcAI;
     [HideInInspector]
     public string names;
     private string state;
@@ -15,13 +14,19 @@ public class NpcStat : MonoBehaviour
     private int level;
     private float hungry;
     private float exp;
+
+    private NpcAI npcAI;
     private GameObject prefab;
     private Npc_Info_UI npcInfo;
+    [SerializeField]
+    private GameObject npcManager;
+    private Npc_datamanager npcdata;
     // Start is called before the first frame update
     void Start()
     {
         npcInfo = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Npc_Info_UI>();
-
+        npcdata = npcManager.GetComponent<Npc_datamanager>();
+        npcdata.Setaschild(this.gameObject);
         // DB √ ±‚»≠
         int npcID = GetComponent<NpcAI>().ID;
         names = npc_database.npcData[npcID].name;
