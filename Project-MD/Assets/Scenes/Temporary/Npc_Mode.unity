@@ -2532,6 +2532,7 @@ MonoBehaviour:
   - {fileID: 2140786979}
   - {fileID: 521207859}
   BuildingInfo_Image: {fileID: 0}
+  mouseIndicator: {fileID: 0}
 --- !u!114 &363313402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7469,7 +7470,7 @@ GameObject:
   - component: {fileID: 1292409664}
   m_Layer: 0
   m_Name: Npc_Manager
-  m_TagString: Untagged
+  m_TagString: NpcManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
