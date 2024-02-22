@@ -10,7 +10,7 @@ TagManager:
   - GameManager
   - Npc_info
   - Npc
-  - NpcP
+  - NpcManager
   layers:
   - Default
   - TransparentFX

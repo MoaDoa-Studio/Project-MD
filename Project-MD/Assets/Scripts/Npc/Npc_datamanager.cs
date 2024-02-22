@@ -11,6 +11,57 @@ public class GameObjectInfoResult
     public List<int> objectInfoList;
 }
 
+public class Npc_Data : ScriptableObject
+{
+  
+    [field: SerializeField]
+    public string name { get; set; } //이름
+    [field: SerializeField]
+    public int Jin_id { get;  set; } // 고유 객체 번호
+    [field: SerializeField]
+    public string personality { get; set; } // 성격
+    [field: SerializeField]
+    public float hunger { get; set; } //만복도
+    [field: SerializeField]
+    public float exp { get; set; } //경험치
+    [field: SerializeField]
+    public string state { get; set; } //상태 (쉬는중, 일하는중..)
+    [field: SerializeField]
+    public int JinLev { get; set; } //정령 레벨
+
+    [field: SerializeField]
+    public int ReqLev { get; set; } //정령 필요경험치
+    [field: SerializeField]
+    public float F_affinity { get; set; } // 특성 불 친화력
+    [field: SerializeField]
+    public float W_affinity { get; set; } // 특성 물 친화력
+    [field: SerializeField]
+    public float E_affinity { get; set; } // 특성 전기 친화력
+    [field: SerializeField]
+    public float G_affinity { get; set; } // 특성 땅 친화력
+    [field: SerializeField]
+    public string D1 { get; set; }
+    [field: SerializeField]
+    public string D2 { get; set; }
+    [field: SerializeField]
+    public string D3 { get; set; }
+    [field: SerializeField]
+    public string Ef1 { get; set; }
+    public string Ef2 { get; set; }
+    public string Ef3 { get; set; }
+    
+}
+
+public class Level_Data : ScriptableObject
+{
+    [field: SerializeField]
+    public int JinLev { get; set; } //이름
+    [field: SerializeField]
+    public int ReqLev { get; set; } //이름
+   
+    [field: SerializeField]
+    public float hunger { get; set; } //이름
+}
 public class Npc_datamanager : MonoBehaviour
 {
 
@@ -88,6 +139,7 @@ public class Npc_datamanager : MonoBehaviour
 
     }
 
+    // Npc 초기화 버튼 눌릴시에 정령 유무 체크 함수.
     public GameObjectInfoResult DisplayGameObjectInfo(List<GameObject> _gameObjectList)
     {
         // Npc 태그로 찾은 오브젝트 배열로 받음.
@@ -120,4 +172,9 @@ public class Npc_datamanager : MonoBehaviour
         };
     }
 
+    // 하위 오브젝트로 설정.
+    public void Setaschild(GameObject _gameObject)
+    {
+        _gameObject.transform.parent = this.transform;
+    }
 }
