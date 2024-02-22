@@ -46,9 +46,11 @@ public class Npc_Data : ScriptableObject
     [field: SerializeField]
     public string D3 { get; set; }
     [field: SerializeField]
-    public string Ef1 { get; set; }
-    public string Ef2 { get; set; }
-    public string Ef3 { get; set; }
+    public string EF1 { get; set; }
+    [field: SerializeField]
+    public string EF2 { get; set; }
+    [field: SerializeField]
+    public string EF3 { get; set; }
     
 }
 

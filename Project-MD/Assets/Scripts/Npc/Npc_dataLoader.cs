@@ -46,9 +46,9 @@ public class Npc_dataLoader : MonoBehaviour
             npcData.D1 = xmlNode.SelectSingleNode("D1").InnerText;
             npcData.D2 = xmlNode.SelectSingleNode("D2").InnerText;
             npcData.D3 = xmlNode.SelectSingleNode("D3").InnerText;
-            npcData.Ef1 = xmlNode.SelectSingleNode("EF1").InnerText;
-            npcData.Ef1 = xmlNode.SelectSingleNode("EF2").InnerText;
-            npcData.Ef1 = xmlNode.SelectSingleNode("EF3").InnerText;
+            npcData.EF1 = xmlNode.SelectSingleNode("EF1").InnerText;
+            npcData.EF2 = xmlNode.SelectSingleNode("EF2").InnerText;
+            npcData.EF3 = xmlNode.SelectSingleNode("EF3").InnerText;
 
             npcDatas.Add(npcData);
 
