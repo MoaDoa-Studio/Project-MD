@@ -107,7 +107,7 @@ public class NpcStat : MonoBehaviour
         
         // 문자열의 첫번째로 정령의 카테고리를 분류.
         char firstChar = input[0];
-        Debug.Log("슬라임의 첫번쨰 글자는 : " + firstChar);
+        //Debug.Log("슬라임의 첫번쨰 글자는 : " + firstChar);
         int classification;
 
         switch (firstChar)
@@ -153,7 +153,7 @@ public class NpcStat : MonoBehaviour
             F_affinity = 3f;
             G_affinity = 3f;
 
-            Debug.Log("물, 불, 전기, 땅 특성값은 :" + W_affinity + "," + F_affinity + ", " + E_affinity + ", " + G_affinity);
+            //Debug.Log("물, 불, 전기, 땅 특성값은 :" + W_affinity + "," + F_affinity + ", " + E_affinity + ", " + G_affinity);
             affinity.Add(W_affinity);
             affinity.Add(F_affinity);
             affinity.Add(E_affinity);
@@ -181,7 +181,7 @@ public class NpcStat : MonoBehaviour
             affinity.Add(E_affinity);
             affinity.Add(G_affinity);
 
-            Debug.Log("물, 불, 전기, 땅 특성값은 :" + W_affinity + "," + F_affinity + ", " + E_affinity + ", " + G_affinity);
+           // Debug.Log("물, 불, 전기, 땅 특성값은 :" + W_affinity + "," + F_affinity + ", " + E_affinity + ", " + G_affinity);
             return;
         }
 
@@ -218,18 +218,18 @@ public class NpcStat : MonoBehaviour
     // 추가 특성값 부여.
     private void GetWeightedRandom()
     {
-        Debug.Log("특성의 총 갯수는 : " + affinity.Count);
+        //Debug.Log("특성의 총 갯수는 : " + affinity.Count);
         
         List<int> result = FindMaxAndSecondMax(affinity);
         int Maxindex = result[0];
         int secondMaxindex = result[1];
-        Debug.Log("리스트 가장 큰, 둘쨰 " +  Maxindex +", "+ secondMaxindex);
+        //Debug.Log("리스트 가장 큰, 둘쨰 " +  Maxindex +", "+ secondMaxindex);
         int maxAddValue = 0;
         int addValue = GetMaxWeightedRandoms(maxAddValue, firstMaxProbablities);
         int secondAddValue = 0;
         int add2Value = GetsecondWeightedRandoms(secondAddValue, secondMaxProbablities);
 
-        Debug.Log("주스탯, 부스탯 더한값 :" + addValue + ", " + add2Value);
+        //Debug.Log("주스탯, 부스탯 더한값 :" + addValue + ", " + add2Value);
         affinity[Maxindex] += addValue;
         affinity[secondMaxindex] += add2Value;
 
@@ -324,5 +324,7 @@ public class NpcStat : MonoBehaviour
     private void OnMouseDown()
     {
         npc_info.get_Values(names, level, personality, productivity, hunger_Req, levelingexp, W_affinity, F_affinity, E_affinity, G_affinity, D1,D2,D3, this.gameObject);
+
+        FindAnyObjectByType<Camera>().GetComponent<CameraMove>().npc_CameraMove(this.gameObject);
     }
 }

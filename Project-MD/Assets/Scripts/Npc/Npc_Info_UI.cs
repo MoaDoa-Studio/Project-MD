@@ -74,4 +74,11 @@ public class Npc_Info_UI : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        if(!npc_info.gameObject.activeSelf)
+        {
+            FindAnyObjectByType<Camera>().GetComponent<CameraMove>().target = null;
+        }
+    }
 }

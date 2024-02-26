@@ -46,8 +46,8 @@ public class Spawner : MonoBehaviour
         if (instantiatedPrefab != null)
         {
             GameObject npcInstance = Instantiate(instantiatedPrefab, this.transform);
-            Debug.Log(npcInstance + " 새로 생성된 오브젝트 이름이다");
-            Debug.Log("생성된" + randomIndex + "번호이다");
+            //Debug.Log(npcInstance + " 새로 생성된 오브젝트 이름이다");
+            //Debug.Log("생성된" + randomIndex + "번호이다");
             npcInstance.GetComponent<NpcStat>().Get_Infovalue(randomIndex,slimeName);
 
 
