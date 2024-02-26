@@ -25,7 +25,7 @@ public class NpcStat : MonoBehaviour
    [SerializeField]
     private float hunger_Req;
     [SerializeField]
-    private float levelingexp;
+    private float levelingexp; // 레벨업에 필요한 경험치
     [SerializeField]
     private string personality;
     [SerializeField]
@@ -35,6 +35,7 @@ public class NpcStat : MonoBehaviour
     [SerializeField]
     private string D3;
 
+    public float nowexp; // 정령 현재 경험친
     private GameObject npc_UI;
     private Npc_Info_UI npc_info;
     private Npc_datamanager npcdata;
@@ -63,7 +64,25 @@ public class NpcStat : MonoBehaviour
 
     void Update()
     {
-        
+        control_Leveling();
+    }
+
+    private void control_Leveling()
+    {
+        if(nowexp >= levelingexp)
+        {
+            nowexp = 0;
+            level++;
+            levelingexp = npcLoader.levelDatas[level + 1 ].ReqLev;
+            npc_info.get_Values(names, level, personality, productivity, hunger_Req, levelingexp, W_affinity, F_affinity, E_affinity, G_affinity, D1,D2,D3, this.gameObject);
+         }
+    }
+
+    // 미구현
+    public void UI_addExp(float _exp)
+    {
+        nowexp += _exp;
+        npc_info.gain_Exp(nowexp);
     }
 
     // 정령 생성시 데이터 호출 및 저장.
@@ -301,8 +320,9 @@ public class NpcStat : MonoBehaviour
     }
    
 
+    // 마우스 버튼을 눌렀을 때
     private void OnMouseDown()
     {
-        npc_info.get_Values(names, level, personality, productivity, hunger_Req, levelingexp, W_affinity, F_affinity, E_affinity, G_affinity, D1,D2,D3);
+        npc_info.get_Values(names, level, personality, productivity, hunger_Req, levelingexp, W_affinity, F_affinity, E_affinity, G_affinity, D1,D2,D3, this.gameObject);
     }
 }
