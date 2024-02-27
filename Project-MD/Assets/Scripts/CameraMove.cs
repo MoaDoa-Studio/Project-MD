@@ -12,15 +12,6 @@ public class CameraMove : MonoBehaviour
     public void npc_CameraMove(GameObject _gameObject)
     {
         target = _gameObject.transform;
-        desiredPosition = target.position + offset;
-       
-        Vector3 TargetDist = transform.position - desiredPosition;
-        TargetDist = Vector3.Normalize(TargetDist);
-
-        // 카메라의 대상 위치간의 보간
-        Vector3 pos = Vector3.Lerp(transform.position, desiredPosition, smooth);
-
-        target.position = pos; // 카메라 위치 업데이트
     }
 
     private void Update()
@@ -32,7 +23,10 @@ public class CameraMove : MonoBehaviour
         }
         else
         {
-            transform.position = target.position + new Vector3(offset.x,offset.y,offset.z);
+            desiredPosition = target.position + offset;
+            Debug.Log("desiredPosition: " + desiredPosition);
+            //transform.position = target.position + new Vector3(offset.x,offset.y,offset.z);
+            transform.position = Vector3.Lerp (transform.position, desiredPosition, smooth);
         }
     }
 }

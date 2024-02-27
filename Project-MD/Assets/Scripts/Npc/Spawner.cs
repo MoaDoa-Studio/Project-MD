@@ -38,8 +38,8 @@ public class Spawner : MonoBehaviour
     public void spawnNpc()
     {
         randomIndex = GetRandomValue();
-        Debug.Log(randomIndex + "번호이다");
-        Debug.Log("Prefabs/Npc/Lv1/" + slimeName);
+        //Debug.Log(randomIndex + "번호이다");
+        //Debug.Log("Prefabs/Npc/Lv1/" + slimeName);
 
         GameObject instantiatedPrefab = LoadPrefab("Assets/Prefabs/Npc/Lv1/", slimeName);
 
