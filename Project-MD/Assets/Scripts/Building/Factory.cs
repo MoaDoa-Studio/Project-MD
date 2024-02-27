@@ -16,15 +16,17 @@ public class Factory : Building
     public int level; // 레벨.
     public bool state; // 운용 상태.
     public int currentProduct; // 현재까지의 생산량.
+    public int currentNpcAI_ID; // 현재 등록된 NPC의 고유 ID, NpcAI_ID 참조.
+
     public void Start()
     {
         level = 1;
         state = false;
         currentProduct = 0;
+        currentNpcAI_ID = -1;
         builderManager = GameManager.instance.builderManager;
         origin_Position = Vector3.zero;
     }
-
     protected override void OnMouseUp()
     {
         int currentBuilderMode = builderManager.get_BuilderMode();
@@ -35,7 +37,7 @@ public class Factory : Building
 
         if (currentBuilderMode == 0) // NO
         {
-            builderManager.ViewBuildingInfo(ID, level, currentPollution);
+            builderManager.ViewBuildingInfo(ID, level, currentPollution, currentNpcAI_ID);
             return;
         }
 
@@ -43,7 +45,6 @@ public class Factory : Building
         if (builderManager.mouseIndicator == this.gameObject)
             Builder_Menu.SetActive(true);
     }
-
     protected override void OnMouseDrag()
     {
         int currentBuilderMode = builderManager.get_BuilderMode();
@@ -74,7 +75,6 @@ public class Factory : Building
             builderManager.moveItem();
         }
     }
-
     public void Click_FixButton()
     {
         // 충돌 중인 건물이 있다면?
@@ -87,7 +87,6 @@ public class Factory : Building
         Builder_Menu.SetActive(false);
         builderManager.StopMove();
     }
-
     public void Click_DestroyButton()
     {
         // 선택된 건물을 파괴할 때 사용하는 함수.
@@ -98,7 +97,6 @@ public class Factory : Building
         Builder_Menu.SetActive(false);
         builderManager.StopMove();
     }
-
     public void Click_ReturnButton()
     {
         // 배치를 캔슬하고 원래 위치로 되돌릴 때.        
@@ -112,7 +110,6 @@ public class Factory : Building
         Builder_Menu.SetActive(false);
         builderManager.StopMove();
     }
-
     public void Click_QuitButton()
     {
         // 충돌 중인 건물이 있다면?

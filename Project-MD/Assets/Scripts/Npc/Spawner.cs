@@ -11,7 +11,7 @@ public class Spawner : MonoBehaviour
     // 생성할 정령 구하는 함수.
     private int GetRandomValue()
     {
-        int num = this.GetComponent < Npc_dataLoader>().npcDatas.Count;
+        int num = this.GetComponent<Npc_dataLoader>().npcDatas.Count;
         randomIndex = UnityEngine.Random.Range(1, num);
 
         if (randomIndex <= 2)

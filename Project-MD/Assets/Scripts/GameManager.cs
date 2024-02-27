@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public BuilderManager builderManager;    
     public InputManager inputManager;
     public ResourceManager resourceManager;
-    public Building_Info_UI buildingInfo;
+    public Npc_datamanager npc_Datamanager;
 
     private void Awake()
     {

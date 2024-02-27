@@ -100,10 +100,11 @@ MonoBehaviour:
   currentPollution: 0
   isCollide: 0
   isFixed: 0
-  Builder_Menu: {fileID: 0}
+  Builder_Menu: {fileID: 5784545189970659283}
   level: 0
   state: 0
   currentProduct: 0
+  currentNpcAI_ID: 0
 --- !u!1 &5160217588954854116
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,5 +305,10 @@ PrefabInstance:
 --- !u!224 &2298842541818771943 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5567948086301955359, guid: b7db84b5c20538e44878106062d83f4e, type: 3}
+  m_PrefabInstance: {fileID: 5954447364192333048}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5784545189970659283 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 208475546728049451, guid: b7db84b5c20538e44878106062d83f4e, type: 3}
   m_PrefabInstance: {fileID: 5954447364192333048}
   m_PrefabAsset: {fileID: 0}

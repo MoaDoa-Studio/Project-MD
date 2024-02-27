@@ -12,8 +12,7 @@ public class GameObjectInfoResult
 }
 
 public class Npc_Data : ScriptableObject
-{
-  
+{  
     [field: SerializeField]
     public string name { get; set; } //이름
     [field: SerializeField]
@@ -66,7 +65,6 @@ public class Level_Data : ScriptableObject
 }
 public class Npc_datamanager : MonoBehaviour
 {
-
     public List<GameObject> npc_List = new List<GameObject>();
     private int totalNpc;  // 전체 정령 수.
     public GameObject selectedNpc; // 현재 다루고 있는 게임데이터
@@ -134,11 +132,7 @@ public class Npc_datamanager : MonoBehaviour
 
         return npc_List;
         // 현재 필드에 존재하는 오브젝트의 id 값을 List로 받아들임
-        // 정령의 id값으로 NPCDatabasaeSO 데이터를 불러들일 수 있음
-       
-
-
-
+        // 정령의 id값으로 NPCDatabasaeSO 데이터를 불러들일 수 있음      
     }
 
     // Npc 초기화 버튼 눌릴시에 정령 유무 체크 함수.
