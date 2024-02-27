@@ -21,7 +21,7 @@ public class NpcStat : MonoBehaviour
     [SerializeField]
     private float G_affinity;
     [SerializeField]
-    private int level = 1; // 정령 1레벨 초기화.
+    public int level = 1; // 정령 1레벨 초기화.
    [SerializeField]
     private float hunger_Req;
     [SerializeField]
@@ -318,8 +318,15 @@ public class NpcStat : MonoBehaviour
         }
 
     }
-   
-
+    public string[] GetSelectBuildingNpcInfo()
+    {
+        string[] result = new string[4] { "", "", "", "" };
+        result[0] = names;
+        result[1] = level.ToString();
+        result[2] = personality;
+        result[3] = jin_Id.ToString();
+        return result;
+    }
     // 마우스 버튼을 눌렀을 때
     private void OnMouseDown()
     {

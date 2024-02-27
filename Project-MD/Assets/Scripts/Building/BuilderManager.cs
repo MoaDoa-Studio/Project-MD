@@ -3,28 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-public class BuilderManager : MonoBehaviour
-{
-    [SerializeField]
-    private Grid grid;
-    [SerializeField]
-    private GameObject cellIndicator; // 건물 아래 생성되는 셀.
-    [SerializeField]
-    private Material[] cell_Color; // 셀 컬러.
+
+public partial class BuilderManager : MonoBehaviour
+{    
     [SerializeField]
     private GameObject instance_Parent; // 생성된 빌딩 부모.               
     [SerializeField]
-    public BuildingDatabaseSO database; // 빌딩 DB        
+    public BuildingDatabaseSO database; // 빌딩 DB            
     [SerializeField]
-    public ResourceManager resourceManager; // 빌딩 DB        
-    [SerializeField]
-    private GameObject Builder_UI;
-    [SerializeField]
-    private GameObject GridLine; // 그리드 표시
-    [SerializeField]
-    private GameObject BuildingInfo_UI; // 건물 상태창 UI.
-    [SerializeField]
-    private TextMeshProUGUI[] BuildingInfo; // 건물 상태창 인포.    
+    private GameObject Builder_UI;    
     [SerializeField]
     private Image BuildingInfo_Image; // 건물 상태창 건물 이미지.    
 
@@ -33,12 +20,7 @@ public class BuilderManager : MonoBehaviour
 
     // Builder 하위 UI들.    
     private GameObject Center_UI;
-    private GameObject Right_UI;
-    private Button Relocate;
-    private Button Fix;
-    private Button Cancel;
-    private Button Quit;    
-    
+
     BuilderMode builderMode;
     enum BuilderMode
     {
@@ -46,32 +28,38 @@ public class BuilderManager : MonoBehaviour
         Default, // 기본 건축 모드.
         Fix, // 새로운 건물 설치 모드.
         Relocate, // 배치 수정 모드.
-    }    
-
+    }
     private void Start()
     {
         // 하위 UI 할당.
         Center_UI = Builder_UI.transform.Find("Center_UI").gameObject;
-        Right_UI = Builder_UI.transform.Find("Right_UI").gameObject;        
-        Relocate = Right_UI.transform.Find("Relocate").GetComponent<Button>();
-        Fix = Right_UI.transform.Find("Fix").GetComponent<Button>();
-        Cancel = Right_UI.transform.Find("Cancel").GetComponent<Button>();
-        Quit = Right_UI.transform.Find("Quit").GetComponent<Button>();
-        resourceManager = this.GetComponent<ResourceManager>();
 
         // 초기화.
         StopMove();
         builderMode = BuilderMode.No;
     }
-
     private void Update()
     {
         change_CellColor();
     }
+}
+
+partial class BuilderManager
+{
+    [SerializeField]
+    private GameObject cellIndicator; // 건물 아래 생성되는 셀.
+    [SerializeField]
+    private Material[] cell_Color; // 셀 컬러.
+    [SerializeField]
+    private Grid grid;
+    [SerializeField]
+    private GameObject GridLine; // 그리드 표시
+
+    // 건물 크래프팅 관련.
     public void change_BuilderMode(string mode)
-    {        
+    {
         // 현재 건축 모드를 변경하는 함수.
-        switch(mode)
+        switch (mode)
         {
             case "No":
                 builderMode = BuilderMode.No;
@@ -80,40 +68,28 @@ public class BuilderManager : MonoBehaviour
             case "Default":
                 builderMode = BuilderMode.Default;
                 GridLine.SetActive(true);
-                Fix.interactable = false;
-                Cancel.interactable = false;
-                Relocate.interactable = true;
-                Quit.interactable = true;                
                 break;
             case "Fix":
                 builderMode = BuilderMode.Fix;
-                GridLine.SetActive(true);                
-                Fix.interactable = true;
-                Cancel.interactable = true;
-                Relocate.interactable = false;
-                Quit.interactable = false;
+                GridLine.SetActive(true);
                 break;
             case "Relocate":
                 builderMode = BuilderMode.Relocate;
-                GridLine.SetActive(true);                
-                Fix.interactable = false;
-                Cancel.interactable = true;
-                Relocate.interactable = true;
-                Quit.interactable = true;
+                GridLine.SetActive(true);
                 break;
         }
     }
     public int get_BuilderMode()
     {
         return (int)builderMode;
-    }    
+    }
     public void click_BuildingTap(int index)
     {
         // 건물 테마 탭 클릭 시 변경하는 함수.
         for (int i = 0; i < Center_UI.transform.childCount; i++)
         {
             // 원하는 빌딩 탭인 경우.
-            if (i == index)            
+            if (i == index)
                 Center_UI.transform.GetChild(i).gameObject.SetActive(true);
             else
                 Center_UI.transform.GetChild(i).gameObject.SetActive(false);
@@ -127,8 +103,8 @@ public class BuilderManager : MonoBehaviour
 
         // 배치를 캔슬할 때 사용하는 함수.
         if (mouseIndicator != null)
-            Destroy(mouseIndicator);                    
-        
+            Destroy(mouseIndicator);
+
         // 초기화 후 건축모드 퇴장.
         mouseIndicator = null;
         cellIndicator.SetActive(false);
@@ -143,7 +119,7 @@ public class BuilderManager : MonoBehaviour
 
         // 건물을 처음 생성할 때 사용하는 함수.
         // 매개 변수 ID와 같은 값을 가지는 Data.ID가 있다면 불러오기.
-        selectedObjectIndex = database.buildingsData.FindIndex(data => data.ID == ID);        
+        selectedObjectIndex = database.buildingsData.FindIndex(data => data.ID == ID);
         if (selectedObjectIndex < 0) // 데이터가 없다면 중지.
         {
             Debug.LogError($"No ID found {ID}");
@@ -156,8 +132,8 @@ public class BuilderManager : MonoBehaviour
         // 불러온 데이터 건물 생성.
         if (mouseIndicator != null)
             Destroy(mouseIndicator);
-        mouseIndicator = Instantiate(database.buildingsData[selectedObjectIndex].prefab, grid.CellToWorld(gridPos), Quaternion.identity, instance_Parent.transform);        
-       
+        mouseIndicator = Instantiate(database.buildingsData[selectedObjectIndex].prefab, grid.CellToWorld(gridPos), Quaternion.identity, instance_Parent.transform);
+
         // 셀 인디케이터 액티브 및 사이즈 할당.        
         cellIndicator.transform.localPosition = grid.CellToWorld(gridPos);
         Vector3Int prefab_size = database.buildingsData[selectedObjectIndex].size;
@@ -199,9 +175,8 @@ public class BuilderManager : MonoBehaviour
         mouseIndicator = null;
         cellIndicator.SetActive(false);
     }
-
     public void moveItem()
-    {        
+    {
         // 마우스 -> 그리드 좌표 변환.
         Vector3Int gridPos = mouseToGrid();
 
@@ -215,7 +190,6 @@ public class BuilderManager : MonoBehaviour
         // 셀 인디케이터 액티브
         cellIndicator.SetActive(true);
     }
-
     public bool checkCollide()
     {
         // 건물끼리 충돌 감지 함수.
@@ -223,9 +197,8 @@ public class BuilderManager : MonoBehaviour
             return true;
         return false;
     }
-
     private void change_CellColor()
-    {        
+    {
         if (checkCollide())
             cellIndicator.transform.GetChild(0).GetComponent<MeshRenderer>().material = cell_Color[0];
         else
@@ -239,14 +212,13 @@ public class BuilderManager : MonoBehaviour
         Vector3Int gridPos = grid.WorldToCell(mousePos);
         return gridPos;
     }
-
     private Vector3Int centerToGrid()
     {
         // 마우스 -> 그리드 좌표 변환 함수.
         Vector3 centerPos = GameManager.instance.inputManager.get_CenterPosition();
         centerPos.y = 0;
         Vector3Int gridPos = grid.WorldToCell(centerPos);
-        return gridPos;   
+        return gridPos;
     }
     private void set_CellIndicator(Vector3Int size, Vector3 child_Pos)
     {
@@ -255,8 +227,18 @@ public class BuilderManager : MonoBehaviour
         cellIndicator_child.localScale = new Vector3(size.x, 0.00001f, size.z);
         cellIndicator_child.localPosition = new Vector3(child_Pos.x, 0f, child_Pos.z);
     }
+}
 
-    public void ViewBuildingInfo(int ID, int level, int pollution)
+partial class BuilderManager
+{
+    // UI 불러오기
+    [SerializeField]
+    private GameObject BuildingInfo_UI; // 건물 상태창 UI      
+    [SerializeField]
+    private GameObject SelectBuildingNpc_UI; // 건물에 배치할 캐릭터 선택 UI
+    [SerializeField]
+    private GameObject SelectBuildingNpc_Button; // 건물에 배치할 캐릭터 선택 버튼.
+    public void ViewBuildingInfo(int ID, int level, int pollution, int currentNpcAI_ID)
     {
         selectedObjectIndex = database.buildingsData.FindIndex(data => data.ID == ID);
         // 데이타가 없다면 중지.
@@ -265,14 +247,37 @@ public class BuilderManager : MonoBehaviour
             Debug.LogError($"No ID found {ID}");
             return;
         }
-        
-        BuildingInfo[0].text = database.buildingsData[selectedObjectIndex].name; // 이름
-        BuildingInfo[1].text = level.ToString(); // 레벨.
-        BuildingInfo[2].text = database.buildingsData[selectedObjectIndex].type; // 타입.
-        BuildingInfo[3].text = database.buildingsData[selectedObjectIndex].product.ToString();
-        BuildingInfo[4].text = database.buildingsData[selectedObjectIndex].production_Speed.ToString();        
-        BuildingInfo[5].text = pollution.ToString();
-        BuildingInfo_Image.sprite = database.buildingsData[selectedObjectIndex].sprite;
+
+        GameObject TextInfo = BuildingInfo_UI.transform.Find("Info").gameObject;
+        TextInfo.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = database.buildingsData[selectedObjectIndex].name; // 이름
+        TextInfo.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = level.ToString(); // 레벨.
+        TextInfo.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = database.buildingsData[selectedObjectIndex].type; // 타입.
+        TextInfo.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = database.buildingsData[selectedObjectIndex].product.ToString(); // 생산량
+        TextInfo.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = database.buildingsData[selectedObjectIndex].production_Speed.ToString(); // 생산속도.
+        TextInfo.transform.GetChild(5).GetComponent<TextMeshProUGUI>().text = pollution.ToString(); // 오염도.
+        BuildingInfo_Image.sprite = database.buildingsData[selectedObjectIndex].sprite; // 건물 이미지.
+
         BuildingInfo_UI.SetActive(true);
+    }
+
+    public void ViewSelectBuildingNpcUI()
+    {
+        List<GameObject> Npc_List = GameManager.instance.npc_Datamanager.get_totalNpcValues();
+
+        GameObject SelectBuildingNpc_Content = SelectBuildingNpc_UI.transform.Find("Scroll View/Viewport/Content").gameObject;
+        
+        foreach (Transform child in SelectBuildingNpc_Content.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        foreach (GameObject npc in Npc_List)
+        {
+            GameObject clone = Instantiate(SelectBuildingNpc_Button, SelectBuildingNpc_Content.transform);
+            clone.transform.GetComponent<SelectBuildingNpc_Button>().SetButtonData(npc);
+        }
+
+        SelectBuildingNpc_UI.transform.Find("Scroll View/Scrollbar Vertical").GetComponent<Scrollbar>().value = 1f;
+        SelectBuildingNpc_UI.SetActive(true);
     }
 }

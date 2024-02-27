@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1595707846232999883}
   m_Layer: 0
   m_Name: Elecslime
-  m_TagString: Untagged
+  m_TagString: Npc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,6 +78,7 @@ MonoBehaviour:
   D1: 
   D2: 
   D3: 
+  nowexp: 0
 --- !u!65 &1595707846232999883
 BoxCollider:
   m_ObjectHideFlags: 0
