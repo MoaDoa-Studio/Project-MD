@@ -46,9 +46,10 @@ public class NpcStat : MonoBehaviour
     int[] firstMaxProbablities = { 5, 15, 30, 60, 5 };
     int[] secondMaxProbablities = { 5, 15, 60, 15, 5 };
     //int[] elseProbablities = { 5, 60, 30, 5 };
-    
+
+    public int PID; // 유일 키
     void Start()
-    {
+    {        
         npc_info = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Npc_Info_UI>();    // 정령 UI.
         npcLoader = GameObject.FindGameObjectWithTag("NpcManager").GetComponent<Npc_dataLoader>(); // 정령 interface 호출.
         npcdata = GameObject.FindGameObjectWithTag("NpcManager").GetComponent<Npc_datamanager>();  //전체 정령 관리 스크립트.
@@ -65,6 +66,16 @@ public class NpcStat : MonoBehaviour
     void Update()
     {
         control_Leveling();
+    }
+
+    public void SetPrimaryID(int num)
+    {
+        Debug.Log("SetPID func");
+        this.PID = num;
+    }
+    public int GetPrimaryID()
+    {
+        return PID;
     }
 
     private void control_Leveling()
@@ -317,16 +328,25 @@ public class NpcStat : MonoBehaviour
             return currentValue - 2;
         }
 
-    }
-    public string[] GetSelectBuildingNpcInfo()
+    }    
+    #region Get/Set 함수
+    public string GetName()
     {
-        string[] result = new string[4] { "", "", "", "" };
-        result[0] = names;
-        result[1] = level.ToString();
-        result[2] = personality;
-        result[3] = jin_Id.ToString();
-        return result;
+        return names;
     }
+    public int GetLevel()
+    {
+        return level;
+    }
+    public string GetPersonality()
+    {
+        return personality;
+    }
+    public int GetJinId()
+    {
+        return jin_Id;
+    }
+    #endregion
     // 마우스 버튼을 눌렀을 때
     private void OnMouseDown()
     {

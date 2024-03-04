@@ -16,10 +16,11 @@ public partial class BuilderManager : MonoBehaviour
     private Image BuildingInfo_Image; // 건물 상태창 건물 이미지.    
 
     private int selectedObjectIndex = -1; // 선택된 건물 인덱스.
-    public GameObject mouseIndicator; // 현재 선택된 건물 저장.
-
-    // Builder 하위 UI들.    
+    public GameObject mouseIndicator; // 현재 선택된 건물 저장.    
     private GameObject Center_UI;
+
+    // 현재 빌딩을 <고유 ID, Building>을 통해 저장.
+    private Dictionary<int, Building> Buildings = new Dictionary<int, Building>();
 
     BuilderMode builderMode;
     enum BuilderMode
@@ -37,6 +38,7 @@ public partial class BuilderManager : MonoBehaviour
         // 초기화.
         StopMove();
         builderMode = BuilderMode.No;
+        currentBuildingPID = -1;
     }
     private void Update()
     {
@@ -56,7 +58,7 @@ partial class BuilderManager
     private GameObject GridLine; // 그리드 표시
 
     // 건물 크래프팅 관련.
-    public void change_BuilderMode(string mode)
+    public void ChangeBuilderMode(string mode)
     {
         // 현재 건축 모드를 변경하는 함수.
         switch (mode)
@@ -108,7 +110,7 @@ partial class BuilderManager
         // 초기화 후 건축모드 퇴장.
         mouseIndicator = null;
         cellIndicator.SetActive(false);
-        change_BuilderMode("No");
+        ChangeBuilderMode("No");
         StopMove();
     }
     public void StartPlacement(int ID)
@@ -142,7 +144,7 @@ partial class BuilderManager
         cellIndicator.SetActive(true);
 
         // 설치 모드로 변경.
-        GameManager.instance.builderManager.change_BuilderMode("Fix");
+        GameManager.instance.builderManager.ChangeBuilderMode("Fix");
 
         // 콜라이더 체크.
         change_CellColor();
@@ -238,46 +240,63 @@ partial class BuilderManager
     private GameObject SelectBuildingNpc_UI; // 건물에 배치할 캐릭터 선택 UI
     [SerializeField]
     private GameObject SelectBuildingNpc_Button; // 건물에 배치할 캐릭터 선택 버튼.
-    public void ViewBuildingInfo(int ID, int level, int pollution, int currentNpcAI_ID)
-    {
-        selectedObjectIndex = database.buildingsData.FindIndex(data => data.ID == ID);
+
+    public int currentBuildingPID;
+    public void ViewFactoryInfo(Factory factory) // 현재에는 오로지 팩토리 타입의 건물만 대응
+    {        
+        selectedObjectIndex = database.buildingsData.FindIndex(data => data.ID == factory.ID);
         // 데이타가 없다면 중지.
         if (selectedObjectIndex < 0)
         {
-            Debug.LogError($"No ID found {ID}");
+            Debug.LogError($"No ID found {factory.ID}");
             return;
         }
 
         GameObject TextInfo = BuildingInfo_UI.transform.Find("Info").gameObject;
-        TextInfo.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = database.buildingsData[selectedObjectIndex].name; // 이름
-        TextInfo.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = level.ToString(); // 레벨.
-        TextInfo.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = database.buildingsData[selectedObjectIndex].type; // 타입.
-        TextInfo.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = database.buildingsData[selectedObjectIndex].product.ToString(); // 생산량
-        TextInfo.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = database.buildingsData[selectedObjectIndex].production_Speed.ToString(); // 생산속도.
-        TextInfo.transform.GetChild(5).GetComponent<TextMeshProUGUI>().text = pollution.ToString(); // 오염도.
-        BuildingInfo_Image.sprite = database.buildingsData[selectedObjectIndex].sprite; // 건물 이미지.
+        TextInfo.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = database.buildingsData[selectedObjectIndex].name;
+        TextInfo.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = factory.level.ToString();
+        TextInfo.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = database.buildingsData[selectedObjectIndex].type;
+        TextInfo.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = database.buildingsData[selectedObjectIndex].product.ToString();
+        TextInfo.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = database.buildingsData[selectedObjectIndex].production_Speed.ToString();
+        TextInfo.transform.GetChild(5).GetComponent<TextMeshProUGUI>().text = factory.currentPollution.ToString();
+        BuildingInfo_Image.sprite = database.buildingsData[selectedObjectIndex].sprite;
+
+        Debug.Log($"builderManager level : {factory.currentNpcID}");
+        if (factory.currentNpcID != -1)
+        {
+            BuildingInfo_UI.transform.Find("CharacterButton").GetComponent<Image>().sprite = null;
+        }
 
         BuildingInfo_UI.SetActive(true);
+        currentBuildingPID = factory.PID;
+    }
+
+    public void CloseBuildingInfoUI()
+    {
+        currentBuildingPID = -1;
     }
 
     public void ViewSelectBuildingNpcUI()
     {
         List<GameObject> Npc_List = GameManager.instance.npc_Datamanager.get_totalNpcValues();
-
-        GameObject SelectBuildingNpc_Content = SelectBuildingNpc_UI.transform.Find("Scroll View/Viewport/Content").gameObject;
-        
-        foreach (Transform child in SelectBuildingNpc_Content.transform)
-        {
-            Destroy(child.gameObject);
-        }
+        GameObject SelectBuildingNpc_Content = SelectBuildingNpc_UI.transform.Find("Scroll View/Viewport/Content").gameObject;                        
 
         foreach (GameObject npc in Npc_List)
         {
             GameObject clone = Instantiate(SelectBuildingNpc_Button, SelectBuildingNpc_Content.transform);
             clone.transform.GetComponent<SelectBuildingNpc_Button>().SetButtonData(npc);
+        }        
+    }
+
+    public void CloseSelectBuildingNpcUI()
+    {
+        GameObject SelectBuildingNpc_Content = SelectBuildingNpc_UI.transform.Find("Scroll View/Viewport/Content").gameObject;
+
+        foreach (Transform child in SelectBuildingNpc_Content.transform)
+        {
+            Destroy(child.gameObject);
         }
 
-        SelectBuildingNpc_UI.transform.Find("Scroll View/Scrollbar Vertical").GetComponent<Scrollbar>().value = 1f;
-        SelectBuildingNpc_UI.SetActive(true);
+        SelectBuildingNpc_UI.transform.Find("Scroll View/Scrollbar Vertical").GetComponent<Scrollbar>().value = 1f;        
     }
 }
