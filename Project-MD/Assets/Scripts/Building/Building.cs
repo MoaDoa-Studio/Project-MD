@@ -8,14 +8,16 @@ public class Building : MonoBehaviour
     [SerializeField]
     public int ID;
     
-    private int UniqueID;    
-    public int currentPollution; // 오염도.    
-    public bool isCollide = false; // 충돌 체크
-    public bool isFixed = false;
+    public int PID;
+    public int currentPollution;
+    public bool isCollide;
+    public bool isFixed;
 
     private void Start()
     {
-        UniqueID = -1;
+        PID = -1;
+        isFixed = false;
+        isCollide = false;
         currentPollution = 0;        
     }
 
@@ -42,13 +44,12 @@ public class Building : MonoBehaviour
     protected virtual void OnMouseDrag() { }
     #endregion
 
-    public void SetUniqueID(int num)
+    public void SetPrimaryID(int num)
     {
-        UniqueID = num;
+        this.PID = num;
     }
-
-    public int GetUniqueID()
+    public int GetPrimaryID()
     {
-        return UniqueID;
+        return PID;
     }
 }

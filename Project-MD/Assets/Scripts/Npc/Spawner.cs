@@ -50,7 +50,8 @@ public class Spawner : MonoBehaviour
             //Debug.Log("생성된" + randomIndex + "번호이다");
             npcInstance.GetComponent<NpcStat>().Get_Infovalue(randomIndex,slimeName);
 
-
+            // GameDataManager 딕셔너리에 할당 및 해시 키 받아옴.
+            GameDataManager.instance.AddNpcData(npcInstance.GetComponent<NpcStat>());
         }
         //GameObject instantiatedPrefab = Resources.Load<GameObject>("Prefabs/Npc/Lv1/" + slimeName);
         else
