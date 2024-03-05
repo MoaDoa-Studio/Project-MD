@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public BuilderManager builderManager;    
     public InputManager inputManager;
     public ResourceManager resourceManager;
-    public Building_Info_UI buildingInfo;
+    public Npc_datamanager npc_Datamanager;
 
     private void Awake()
     {
@@ -17,5 +17,11 @@ public class GameManager : MonoBehaviour
         else
             Destroy(instance);
     }
-    
+
+    // 기존 건물의 키 등록 용. For Debug.
+    public Building building1;
+    public void Start()
+    {
+        GameDataManager.instance.AddBuildingData(building1);
+    }
 }

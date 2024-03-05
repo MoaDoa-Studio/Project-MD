@@ -11,7 +11,7 @@ public class Spawner : MonoBehaviour
     // 생성할 정령 구하는 함수.
     private int GetRandomValue()
     {
-        int num = this.GetComponent < Npc_dataLoader>().npcDatas.Count;
+        int num = this.GetComponent<Npc_dataLoader>().npcDatas.Count;
         randomIndex = UnityEngine.Random.Range(1, num);
 
         if (randomIndex <= 2)
@@ -50,7 +50,8 @@ public class Spawner : MonoBehaviour
             //Debug.Log("생성된" + randomIndex + "번호이다");
             npcInstance.GetComponent<NpcStat>().Get_Infovalue(randomIndex,slimeName);
 
-
+            // GameDataManager 딕셔너리에 할당 및 해시 키 받아옴.
+            GameDataManager.instance.AddNpcData(npcInstance.GetComponent<NpcStat>());
         }
         //GameObject instantiatedPrefab = Resources.Load<GameObject>("Prefabs/Npc/Lv1/" + slimeName);
         else

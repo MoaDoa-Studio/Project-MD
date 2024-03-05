@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+// 생산 건물
 public class Factory : Building
 {
     [SerializeField]
@@ -13,18 +14,20 @@ public class Factory : Building
     private Vector3 origin_Position;
 
     // 건물 가변 데이터.
-    public int level; // 레벨.
-    public bool state; // 운용 상태.
-    public int currentProduct; // 현재까지의 생산량.
+    public int level;
+    public bool state;
+    public int currentProduct;
+    public int currentNpcID;
+
     public void Start()
     {
         level = 1;
         state = false;
         currentProduct = 0;
+        currentNpcID = -1;
         builderManager = GameManager.instance.builderManager;
         origin_Position = Vector3.zero;
     }
-
     protected override void OnMouseUp()
     {
         int currentBuilderMode = builderManager.get_BuilderMode();
@@ -35,7 +38,7 @@ public class Factory : Building
 
         if (currentBuilderMode == 0) // NO
         {
-            builderManager.ViewBuildingInfo(ID, level, currentPollution);
+            builderManager.ViewFactoryInfo(this);
             return;
         }
 
@@ -43,7 +46,6 @@ public class Factory : Building
         if (builderManager.mouseIndicator == this.gameObject)
             Builder_Menu.SetActive(true);
     }
-
     protected override void OnMouseDrag()
     {
         int currentBuilderMode = builderManager.get_BuilderMode();
@@ -61,7 +63,7 @@ public class Factory : Building
             {
                 builderManager.StartMove(ID, this.gameObject);
                 origin_Position = gameObject.transform.position;
-                builderManager.change_BuilderMode("Relocate");
+                builderManager.ChangeBuilderMode("Relocate");
             }
         }        
         else if (currentBuilderMode == 2) // Fix
@@ -75,52 +77,48 @@ public class Factory : Building
         }
     }
 
+    #region 빌더 버튼 관련
     public void Click_FixButton()
     {
-        // 충돌 중인 건물이 있다면?
-        if (builderManager.checkCollide() == true)
+        // 건물 충돌 체크
+        if (builderManager.checkCollide())
             return;        
 
-        builderManager.change_BuilderMode("Default");
         isFixed = true;
-
-        Builder_Menu.SetActive(false);
-        builderManager.StopMove();
+        ResetBuilderMode();
     }
-
     public void Click_DestroyButton()
     {
-        // 선택된 건물을 파괴할 때 사용하는 함수.
+        // 선택된 건물 파괴 함수.
         if (builderManager.mouseIndicator != null)
             Destroy(builderManager.mouseIndicator);
-        
-        builderManager.change_BuilderMode("Default");
-        Builder_Menu.SetActive(false);
-        builderManager.StopMove();
-    }
 
+        ResetBuilderMode();
+    }
     public void Click_ReturnButton()
     {
-        // 배치를 캔슬하고 원래 위치로 되돌릴 때.        
+        // 배치를 캔슬하고 원래 위치로 되돌릴 때.
         if (origin_Position != Vector3.zero)
         {
             this.gameObject.transform.position = origin_Position;
             origin_Position = Vector3.zero;
         }
 
-        builderManager.change_BuilderMode("Default");
-        Builder_Menu.SetActive(false);
-        builderManager.StopMove();
+        ResetBuilderMode();
     }
-
     public void Click_QuitButton()
     {
-        // 충돌 중인 건물이 있다면?
+        // 건물 충돌 체크.
         if (builderManager.checkCollide() == true)
             return;
-                
-        builderManager.change_BuilderMode("Default");
+        ResetBuilderMode();
+    }
+
+    void ResetBuilderMode()
+    {
+        builderManager.ChangeBuilderMode("Default");
         Builder_Menu.SetActive(false);
         builderManager.StopMove();
     }
+    #endregion
 }
